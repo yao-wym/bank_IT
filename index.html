@@ -54,6 +54,7 @@
 				top: '46px',
 				bottom: '50px'
 			};
+			var activeTab = subpages[0];
 			var subpage_style_with_header = {
 				//				top: '46px',
 				bottom: '50px'
@@ -92,7 +93,7 @@
 			 */
 			function init_pages() {
 				var self = plus.webview.currentWebview();
-				for(var i = 0; i < 4; i++) {
+				for(var i = 0; i < 5; i++) {
 					var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
 					self.append(sub);
 					sub.hide();
@@ -101,7 +102,6 @@
 			};
 
 			function init_tab_bar() {
-				var activeTab = subpages[0];
 				var title = document.getElementById("title");
 				mui('.mui-bar-tab').on('tap', 'a', function(e) {
 					var targetTab = this.getAttribute('tab-page');
@@ -111,6 +111,7 @@
 					plus.webview.show(targetTab);
 					//隐藏当前;
 					plus.webview.hide(activeTab);
+					console.log(activeTab);
 					//更改当前活跃的选项卡
 					activeTab = targetTab;
 				});

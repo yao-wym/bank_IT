@@ -1,6 +1,6 @@
 plus.webview.currentWebview().addEventListener('show', function() {
 	var current = plus.webview.currentWebview().id;
-	if(['index_recive.html', 'index_order.html', 'index_check.html', 'index_message.html', 'index_ucenter.html'].indexOf(current)>0){
+	if(['index_recive.html', 'index_order.html', 'index_check.html', 'index_message.html', 'index_ucenter.html'].indexOf(current)>=0){
 		var main = plus.webview.getLaunchWebview();
 		console.log('show ' + current.id);
 		mui.fire(main, 'init_header', {

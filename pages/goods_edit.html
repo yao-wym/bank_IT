@@ -22,23 +22,18 @@
 			{{ title }}
 			</h1>
 		</header>
-		<header class="mui-bar mui-bar-nav" style="margin-top: 44px;background-color: white;color: #CCCCCC;">
-			<div class="mui-input-row mui-search">
-				<input type="search" class="mui-input-clear" placeholder="">
-			</div>
-		</header>
 	</body>
 	<script src="../js/common.js"></script>
 	<script type="text/javascript">
-		var sub = plus.webview.create("goods_select_sub.html", "goods_select_sub.html", {
-			top: '90px',
+		var sub = plus.webview.create("goods_edit_sub.html", "goods_edit_sub.html", {
+			top: '46px',
 			bottom: "0px"
 		});
 		plus.webview.currentWebview().append(sub)
 		var vm = new Vue({
 			el: '#app',
 			data: {
-				title: '选择出库备件',
+				title: '备件使用情况编辑',
 				orderType: 1
 			},
 			watch: {
