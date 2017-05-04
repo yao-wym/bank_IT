@@ -10,16 +10,12 @@
 		<script src="js/vue-tap.js"></script>
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link href="css/common.css" rel="stylesheet" />
-		<style type="text/css">
-
-		</style>
 	</head>
 
 	<body id="app">
 		<header class="mui-bar mui-bar-nav" style="background-color: white;color: #CCCCCC;">
 			<div id="orderTab" class="mui-segmented-control mui-segmented-control-inverted">
-				<a v-tap="orderType=1" class="mui-control-item mui-active">待接单</a>
-				<a v-tap="orderType=2" class="mui-control-item">进行中</a>
+				<a v-tap="orderType=1" class="mui-control-item mui-active">进行中</a>
 				<a v-tap="orderType=3" class="mui-control-item">维修完成</a>
 				<a v-tap="orderType=4" class="mui-control-item">维修失败</a>
 			</div>
@@ -35,7 +31,7 @@
 		var vm = new Vue({
 			el: '#app',
 			data: {
-				title: '派单',
+				title: '我的订单',
 				orderType:1
 			},
 			watch: {

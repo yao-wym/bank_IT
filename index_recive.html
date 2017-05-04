@@ -7,34 +7,58 @@
 		<title>接单</title>
 		<script src="js/mui.js"></script>
 		<script src="js/vue.js"></script>
+		<script src="js/vue-tap.js"></script>
+		<script src="js/common.js"></script>
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link href="css/common.css" rel="stylesheet" />
-		<style type="text/css">
-		</style>
 	</head>
-	<body>
-		<div id="content" class="mui-content">
-			123
-		</div>
-		<script>
-			/*----------------  	Part 1   	变量声明  		----------------TODO */
 
-			/*----------------  	Part 2 		miu.init  		----------------TODO */
-			mui.init();
-			/*----------------  	Part 3 		mui.plusReady	----------------TODO */
-			mui.plusReady(function() {
-				
-			});
-			/*----------------  	Part 4 		页面设置			----------------TODO */
-			
-			/*----------------  	Part 5 		事件处理			----------------TODO */
-			window.addEventListener('dragright', function(e) {
-				e.detail.gesture.preventDefault();
-			});
-			/*----------------  	Part 6 		平台相关			----------------TODO */
-			 //在android4.4.2中的swipe事件，需要preventDefault一下，否则触发不正常
-		</script>
-		<script src="js/common.js"></script>
+	<body id="app">
+		<header class="mui-bar mui-bar-nav" style="background-color: white;color: #CCCCCC;">
+			<div id="orderTab" class="mui-segmented-control mui-segmented-control-inverted">
+				<a v-tap="orderType=1" class="mui-control-item mui-active">自动派单</a>
+				<a v-tap="orderType=2" class="mui-control-item">定向群组派单</a>
+			</div>
+		</header>
 	</body>
-	
+	<script>
+		/*----------------  	Part 1   	变量声明  		----------------TODO */
+
+		/*----------------  	Part 2 		miu.init  		----------------TODO */
+		mui.init();
+		/*----------------  	Part 3 		mui.plusReady	----------------TODO */
+		mui.plusReady(function() {
+			sub = plus.webview.create("index_recive_list.html", "index_recive_list.html", {
+				top: '40px',
+				bottom: "0px" 
+			});
+			plus.webview.currentWebview().append(sub)
+		});
+		/*----------------  	Part 4 		页面设置			----------------TODO */
+
+		/*----------------  	Part 5 		事件处理			----------------TODO */
+		window.addEventListener('dragright', function(e) {
+			e.detail.gesture.preventDefault();
+		});
+		/*----------------  	Part 6 		平台相关			----------------TODO */
+		//在android4.4.2中的swipe事件，需要preventDefault一下，否则触发不正常
+	</script>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				title: '接单',
+				orderType: 1
+			},
+			watch: {
+				orderType: function(newValue, oldValue) {
+					console.log('v-tap' + newValue);
+					mui.fire(sub, 'change_type', {
+						'type': newValue
+					});
+				}
+			}
+		})
+	</script>
+
 </html>

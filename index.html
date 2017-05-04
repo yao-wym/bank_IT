@@ -18,10 +18,10 @@
 	<body id="app">
 		<!--Begin 顶部导航 + 搜索Bar-->
 		<header class="mui-bar mui-bar-nav" style="background-color: #0A3A81;">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: white;"></a>
 			<h1 class="mui-title" id="page-title" style="color: white;">
 			{{ title }}
 			</h1>
+			<a v-show="title=='接单'" id="add-order-btn" class="mui-pull-right" link="pages/add_order.html" style="font-size: 14px;color: white;margin-top: 11px;">新增工单</a>
 		</header>
 		<!--Begin 底部bar-->
 		<nav class="mui-bar mui-bar-tab">
@@ -31,7 +31,7 @@
 			</a>
 			<a class="mui-tab-item" tab-page="index_order.html">
 				<span class="mui-icon mui-icon-list"></span>
-				<span class="mui-tab-label">订单</span>
+				<span class="mui-tab-label">我的订单</span>
 			</a>
 			<a class="mui-tab-item" tab-page="index_check.html">
 				<span class="mui-icon mui-icon-eye"></span>
@@ -144,7 +144,7 @@
 		var vm = new Vue({
 				el: '#app',
 				data: {
-					title: '派单'
+					title: '接单'
 				}
 			})
 	</script>

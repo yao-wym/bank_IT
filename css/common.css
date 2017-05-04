@@ -1,4 +1,19 @@
-header.mui-bar{
+header.mui-bar {
 	background-color: #0a3a81;
 	color: white;
+}
+.circle-icon{
+	border-radius: 50%;
+}
+.bg{
+	background-color: #0a3a81;
+}
+.index-center-menu li img{
+	border-radius: 50%;
+	width: 25px;
+	height: 25px;
+}
+.index-center-menu li span{
+	position: relative;
+	top: -5px;
 }

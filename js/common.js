@@ -8,7 +8,7 @@ plus.webview.currentWebview().addEventListener('show', function() {
 		});
 	}
 });
-mui('body').on('tap', 'a', function(e) {
+mui('body').on('tap', 'a,li', function(e) {
 	var targetTab = this.getAttribute('link');
 	if(targetTab!=null){
 		console.log('link = '+targetTab);
