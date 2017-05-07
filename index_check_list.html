@@ -5,10 +5,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>接单</title>
-		<script src="js/mui.js"></script>
-		<script src="js/vue.js"></script>
-		<script src="js/vue-tap.js"></script>
-		<script src="js/common.js"></script>
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link href="css/common.css" rel="stylesheet" />
 	</head>
@@ -21,25 +17,40 @@
 			padding-right: 50px;
 		}
 	</style>
-	<!--下拉刷新容器-->
-	<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
-		<div class="mui-scroll">
-			<!--数据列表-->
-			<ul class="mui-table-view mui-table-view-chevron" style="background-color: inherit;">
-				<li style="margin-top: 10px;background-color: white;" v-for="order in orderList[orderType]" track-by="$index" class="mui-table-view-cell">
-					<a link="pages/login.html" style="overflow: hidden;">
-						<p style="font-weight: bold;color: #333333">流水号：{{order}}<span style="float: right;margin-left: 20px;">待接单</span></p>
-						<p>下单日期：2014-02-03</p>
-					</a>
-				</li>
-			</ul>
+
+	<body>
+		<!--下拉刷新容器-->
+		<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<!--数据列表-->
+				<ul class="mui-table-view mui-table-view-chevron" style="background-color: inherit;">
+					<li style="margin-top: 3px;background-color: white;" v-for="order in orderList[orderType]" track-by="$index" class="mui-table-view-cell">
+						<a link="pages/login.html" style="overflow: hidden;">
+							<p style="font-weight: bold;color: #333333">线路名称：{{name}}<span style="float: right;">已完成{{completeNum}}项 剩余{{todoNum}}</p>
+							<p style="font-size: 12px;">寻线日期：{{todo_time}}</p>
+							<p style="font-size: 12px;font-weight: 500;" v-for="engineer in engineers" class="list-col-2">
+								<span>工程师：{{engineer.name}}</span>
+								<span>电话：{{engineer.phone}}</span>
+							</p>
+						</a>
+					</li>
+				</ul>
+			</div>
 		</div>
-	</div>
+		<script src="js/mui.js"></script>
+	<script src="js/vue.js"></script>
+	<script src="js/vue-tap.js"></script>
+	<script src="js/common.js"></script>
 	<script type="text/javascript">
 		var vm = new Vue({
 			el: '#refreshContainer',
 			data: {
 				title: '接单',
+				name:'崇文门A',
+				completeNum:2,
+				todoNum:3,
+				todo_time:'2017.05.06 13:22',
+				engineers:[{name:'袁一帆',phone:'1304122978'},{name:'文耀民',phone:'1304122978'}],
 				orderList: {
 					'1': [2, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4],
 					'2': [12, 3, 4],
@@ -70,5 +81,8 @@
 			vm.orderType = e.detail.type;
 		});
 	</script>
+	</body>
+
+	
 
 </html>

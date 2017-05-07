@@ -16,8 +16,8 @@
 	<body id="app">
 		<header class="mui-bar mui-bar-nav" style="background-color: white;color: #CCCCCC;">
 			<div id="orderTab" class="mui-segmented-control mui-segmented-control-inverted">
-				<a v-tap="orderType=1" class="mui-control-item mui-active">自动派单</a>
-				<a v-tap="orderType=2" class="mui-control-item">定向群组派单</a>
+				<a v-tap="orderType=1" class="mui-control-item mui-active">自动派单({{autoOrder}})</a>
+				<a v-tap="orderType=2" class="mui-control-item">定向群组派单({{groupOrder}})</a>
 			</div>
 		</header>
 	</body>
@@ -29,8 +29,8 @@
 		/*----------------  	Part 3 		mui.plusReady	----------------TODO */
 		mui.plusReady(function() {
 			sub = plus.webview.create("index_recive_list.html", "index_recive_list.html", {
-				top: '40px',
-				bottom: "0px" 
+				top: '50px',
+				bottom: "0px"
 			});
 			plus.webview.currentWebview().append(sub)
 		});
@@ -48,6 +48,8 @@
 			el: '#app',
 			data: {
 				title: '接单',
+				autoOrder:1,
+				groupOrder:2,
 				orderType: 1
 			},
 			watch: {

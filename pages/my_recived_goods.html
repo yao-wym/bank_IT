@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>订单</title>
+		<title>{{title}}</title>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/vue.js"></script>
 		<script src="../js/vue-tap.js"></script>
@@ -21,6 +21,7 @@
 			<h1 class="mui-title" id="page-title" style="color: white;">
 			{{ title }}
 			</h1>
+			<a v-show="pageType=search" id="use-goods" class="mui-pull-right" style="font-size: 14px;color: white;margin-top: 11px;">出库</a>
 		</header>
 		<header class="mui-bar mui-bar-nav" style="margin-top: 44px;background-color: white;color: #CCCCCC;">
 			<div class="mui-input-row mui-search">
@@ -30,7 +31,7 @@
 	</body>
 	<script src="../js/common.js"></script>
 	<script type="text/javascript">
-		var sub = plus.webview.create("goods_select_sub.html", "goods_select_sub.html", {
+		var sub = plus.webview.create("my_recived_goods_sub.html", "my_recived_goods_sub.html", {
 			top: '90px',
 			bottom: "0px"
 		});
@@ -38,7 +39,7 @@
 		var vm = new Vue({
 			el: '#app',
 			data: {
-				title: '选择出库备件',
+				title: '我的入库',
 				orderType: 1
 			},
 			watch: {

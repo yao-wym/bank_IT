@@ -21,7 +21,7 @@
 			<h1 class="mui-title" id="page-title" style="color: white;">
 			{{ title }}
 			</h1>
-			<a v-show="title=='接单'" id="add-order-btn" class="mui-pull-right" link="pages/add_order.html" style="font-size: 14px;color: white;margin-top: 11px;">新增工单</a>
+			<a v-show="title=='接单'" id="add-order-btn" class="mui-pull-right" link="pages/create_work_order.html" style="font-size: 14px;color: white;margin-top: 11px;">新增工单</a>
 		</header>
 		<!--Begin 底部bar-->
 		<nav class="mui-bar mui-bar-tab">
@@ -37,9 +37,12 @@
 				<span class="mui-icon mui-icon-eye"></span>
 				<span class="mui-tab-label">巡检</span>
 			</a>
-			<a class="mui-tab-item" tab-page="index_message.html">
+			<a class="mui-tab-item" tab-page="index_message.html" style="position: relative;">
 				<span class="mui-icon mui-icon-email"></span>
 				<span class="mui-tab-label">消息</span>
+				<div style="font-size: 12px;color: white;border-radius: 50%;width: 14px;height: 14px;background-color: red;position: absolute;right: 15px;top:3px">
+					<span style="position: relative;top:-3px">1</span>
+				</div>
 			</a>
 			<a class="mui-tab-item" tab-page="index_ucenter.html">
 				<span class="mui-icon mui-icon-contact"></span>
@@ -51,8 +54,8 @@
 			/*----------------  	Part 1   	变量声明  		----------------TODO */
 			var subpages = ['index_recive.html', 'index_order.html', 'index_check.html', 'index_message.html', 'index_ucenter.html'];
 			var subpage_style = {
-				top: '46px',
-				bottom: '50px'
+				top: '44px',
+				bottom: '50px' 
 			};
 			var activeTab = subpages[0];
 			var subpage_style_with_header = {

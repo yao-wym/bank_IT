@@ -1,6 +1,6 @@
 plus.webview.currentWebview().addEventListener('show', function() {
 	var current = plus.webview.currentWebview().id;
-	if(['index_recive.html', 'index_order.html', 'index_check.html', 'index_message.html', 'index_ucenter.html'].indexOf(current)>=0){
+	if(['index_recive.html', 'index_order.html', 'index_check.html', 'index_message.html', 'index_ucenter.html'].indexOf(current) >= 0) {
 		var main = plus.webview.getLaunchWebview();
 		console.log('show ' + current.id);
 		mui.fire(main, 'init_header', {
@@ -8,24 +8,42 @@ plus.webview.currentWebview().addEventListener('show', function() {
 		});
 	}
 });
-mui('body').on('tap', 'a,li', function(e) {
+mui('body').on('tap', 'a,li,div', function(e) {
 	var targetTab = this.getAttribute('link');
-	if(targetTab!=null){
-		console.log('link = '+targetTab);
+	if(targetTab != null) {
+		console.log('link = ' + targetTab);
 		var page = plus.webview.getWebviewById(targetTab);
-		if(!page){
-			console.log('open new page '+targetTab);
-			mui.openWindow	({ 
-				url:targetTab,
-				id:targetTab,
-				styles:{
-					top:'0px'
+		if(!page) {
+			console.log('open new page ' + targetTab);
+			mui.openWindow({
+				url: targetTab,
+				id: targetTab,
+				styles: {
+					top: '0px'
 				}
 			});
-		}else{
-			console.log('page '+targetTab+' is loaded');
+		} else {
+			console.log('page ' + targetTab + ' is loaded');
 			page.show("slide-in-right", 300);
 		}
 	}
 	return true;
 });
+
+function redirect(pageUrl) {
+	console.log('link = ' + pageUrl);
+	var page = plus.webview.getWebviewById(pageUrl);
+	if(!page) {
+		console.log('open new page ' + pageUrl);
+		mui.openWindow({
+			url: pageUrl,
+			id: pageUrl,
+			styles: {
+				top: '0px'
+			}
+		});
+	} else {
+		console.log('page ' + pageUrl + ' is loaded');
+		page.show("slide-in-right", 300);
+	}
+}

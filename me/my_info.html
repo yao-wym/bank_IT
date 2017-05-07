@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>{{ title }}</title>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/vue.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/common.css" rel="stylesheet" />
+		<style type="text/css">
+		</style>
+	</head> 
+	<body id="app">
+		<!--Begin 顶部导航 + 搜索Bar-->
+		<header class="mui-bar mui-bar-nav" style="background-color: #0A3A81;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: white;"></a>
+			<h1 class="mui-title" id="page-title" style="color: white;">
+			{{ title }}
+			</h1>
+		</header>
+		<div style="height: 45px;"></div>
+		
+		<ul class="mui-table-view">
+		    <li class="mui-table-view-cell" style="position: initial;">
+		    		<img style="width: 100%;" src="../img/123.png" />
+		    </li>
+		    <li class="mui-table-view-cell" style="position: initial;">编号</li>
+		    <li class="mui-table-view-cell" style="position: initial;">身份证</li>
+		    <li class="mui-table-view-cell" style="position: initial;">姓名</li>
+		    <li class="mui-table-view-cell" style="position: initial;">性别</li>
+		    <li class="mui-table-view-cell" style="position: initial;">维护商：</li>
+		    <li class="mui-table-view-cell" style="position: initial;">区域：</li>
+		    <li class="mui-table-view-cell" style="position: initial;">库房名称</li>
+		    <li class="mui-table-view-cell" style="position: initial;">维修类型：</li>
+		    <li class="mui-table-view-cell" style="position: initial;">电话</li>
+		    <li class="mui-table-view-cell" style="position: initial;">人员状态：</li>
+		    <li class="mui-table-view-cell" style="position: initial;">等级：</li>
+		    <li class="mui-table-view-cell" style="position: initial;">积分：</li>
+		    <li class="mui-table-view-cell" style="position: initial;">编号</li>		    
+		</ul>
+		
+		
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				'title':'我的信息'
+			}
+		})
+	</script>
+</html>

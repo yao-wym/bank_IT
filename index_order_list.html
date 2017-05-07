@@ -19,9 +19,20 @@
 	<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
 		<div class="mui-scroll">
 			<!--数据列表-->
-			<ul class="mui-table-view mui-table-view-chevron">
-				<li v-for="order in orderList[orderType]" track-by="$index" class="mui-table-view-cell">
-					<a link="pages/login.html">{{order}}</a>
+			<ul id="order-list" class="mui-table-view mui-table-view-chevron" style="background-color: inherit;">
+				<li style="margin-top: 10px;background-color: white;" v-for="order in orderList[orderType]" track-by="$index" class="mui-table-view-cell">
+					<a v-tap="showDetail(order)" style="overflow: hidden;">
+						<p style="font-weight: bold;color: #333333">流水号：{{order.orderId}}<span style="float: right;margin-left: 20px;">{{order.status}}</span></p>
+						<p style="font-weight: 500;">下单日期：{{order.time}}</p>
+						<p class="list-col-2">
+							<span>机具编号：{{order.machineId}}</span>
+							<span>机具型号：{{order.machineType}}</span>
+						</p>
+						<p class="list-col-2">
+							<span>装机地址：{{order.machineAddr}}</span>
+							<span>序列号：{{order.machineSn}}</span>
+						</p>
+					</a>
 				</li>
 			</ul>
 		</div>
@@ -30,14 +41,40 @@
 	<script type="text/javascript">
 		var vm = new Vue({
 			el: '#refreshContainer',
+			methods: {
+				showDetail(order) {
+					if(order.status == '已出发') {
+						redirect('pages/order_detail_out.html');
+					} else if(order.status == '维修中') {
+						redirect('pages/order_detail_repair.html');
+					}
+				},
+			},
 			data: {
 				title: '派单',
+				orderType:1,
 				orderList: {
-					'1': [2, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4],
-					'2': [12, 3, 4],
-					'3': [123, 3, 4],
+					"1":[{
+						status:'维修中',
+						orderId:'132',
+						machineSn:'123eqw',
+						machineAddr: 1,
+						machineOrder: 1,
+						machineType: 1,
+						machineId: 1,
+						time:"2017-02-03 20:22:22"
+					},{
+						status:'已出发',
+						orderId:'132',
+						machineSn:'123eqw',
+						machineAddr: 1,
+						machineOrder: 1,
+						machineType: 1,
+						machineId: 1,
+						time:"2017-02-03 20:22:22"
+					},
+					]
 				},
-				orderType: 1
 			},
 
 		})

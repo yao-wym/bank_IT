@@ -2,18 +2,40 @@ header.mui-bar {
 	background-color: #0a3a81;
 	color: white;
 }
-.circle-icon{
+
+.mui-table-view-cell:after {
+	left: 0;
+}
+
+.mui-table-view-chevron .mui-table-view-cell {
+	padding-right: 50px;
+}
+
+.circle-icon {
 	border-radius: 50%;
 }
-.bg{
+
+.bg {
 	background-color: #0a3a81;
 }
-.index-center-menu li img{
+
+.index-center-menu li img {
 	border-radius: 50%;
 	width: 25px;
 	height: 25px;
 }
-.index-center-menu li span{
+
+.index-center-menu li span {
 	position: relative;
 	top: -5px;
+}
+
+.list-col-2 span:nth-child(1) {
+	display: inline-block;
+	width: 50%;
+}
+
+.list-col-2 span:nth-child(2) {
+	display: inline-block;
+	width: 50%;
 }

@@ -15,34 +15,47 @@
 		</style>
 	</head>
 
-		<!--下拉刷新容器-->
-		<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
-			<div class="mui-scroll">
-				<!--数据列表-->
-				<ul class="mui-table-view mui-table-view-chevron">
-					<li link="login.html" v-for="order in orderList[orderType]" track-by="$index" class="mui-table-view-cell">
-						<a link="">{{order}}</a></li>
-				</ul>
-			</div>
+	<!--下拉刷新容器-->
+	<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+		<div class="mui-scroll">
+			<!--数据列表-->
+			<ul class="mui-table-view">
+					<li  v-for="comment in comments" class="mui-table-view-cell mui-media">
+						<a href="javascript:;">
+							<img style="border-radius: 50%;" class="mui-media-object mui-pull-left" src="{{comment.avatar}}">
+							<div class="mui-media-body">
+								<p>
+									<span style="display: inline-block;width: 20%;">{{comment.username}}</span>
+									<span style="display: inline-block;width: 55%;">
+										<i v-for="index in comment.star" class="mui-icon mui-icon-star"></i>
+									</span>
+									<span style="display: inline-block;width: 20%;">{{comment.time}}</span>
+								</p>
+								<p class='mui-ellipsis'>{{comment.content}}</p>
+							</div>
+						</a>
+					</li>
+			</ul>
 		</div>
+	</div>
 	<script src="../js/common.js"></script>
 	<script type="text/javascript">
-		
 		var vm = new Vue({
 			el: '#refreshContainer',
 			data: {
-				title: '派单',
-				orderList: {
-					'1': [2, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4],
-					'2': [12, 3, 4],
-					'3': [123, 3, 4],
-				},
-				orderType: 1
+				title: '评价',
+				comments: [{
+					username:'wym',
+					content:'吼啊',
+					star:4,
+					time:'一天前',
+					avatar:'../img/default.png'
+				}, {}]
 			},
-							
+
 		})
-		
-			mui.init({
+
+		mui.init({
 			pullRefresh: {
 				container: "#refreshContainer", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
 				down: {
@@ -51,7 +64,9 @@
 					contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
 					contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
 					contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
-					callback: function(){mui('#refreshContainer').pullRefresh().endPulldownToRefresh();} //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					callback: function() {
+						mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+					} //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
 				}
 			}
 		})
@@ -59,7 +74,6 @@
 			console.log(JSON.stringify(e.detail.type));
 			vm.orderType = e.detail.type;
 		});
-		
 	</script>
 
 </html>
