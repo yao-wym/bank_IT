@@ -7,6 +7,7 @@
 		<title>我的</title>
 		<script src="js/mui.min.js"></script>
 		<script src="js/vue.js"></script>
+		<script src="js/api.js"></script>
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link href="css/common.css" rel="stylesheet" />
 		<style type="text/css">
@@ -40,7 +41,8 @@
 			.mui-table-view:after {
 				background-color: inherit;
 			}
-			.mui-table-view-cell:after{
+			
+			.mui-table-view-cell:after {
 				background-color: #DDDDDD;
 			}
 			
@@ -109,12 +111,20 @@
 				</li>
 			</ul>
 		</div>
+		<script src="js/common.js"></script>
 		<script>
+			function initUserInfo(user) {
+				alert(JSON.stringify(user));
+			}
 			mui.plusReady(function() {
 				mui.init();
+				bank.get(USER_INFO_API, {
+					"uid": 1,
+					"authCookie": 1,
+					"field": 2
+				}, initUserInfo)
 			});
 		</script>
 	</body>
-	<script src="js/common.js"></script>
 
 </html>

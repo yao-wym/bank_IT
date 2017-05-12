@@ -97,6 +97,9 @@
 		window.addEventListener("change_type", function(e) {
 			console.log(JSON.stringify(e.detail.type));
 			vm.orderType = e.detail.type;
+			bank.get(ORDER_LIST_API,function(e){
+				vm.orderList = e.list
+			})
 		});
 	</script>
 

@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>{{ title }}</title>
-		<script src="../js/mui.min.js"></script>
-		<script src="../js/common.js"></script>
-		<script src="../js/vue.js"></script>
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<link href="../css/common.css" rel="stylesheet" />
 		<style type="text/css">
+
 		</style>
-	</head> 
+	</head>
+
 	<body id="app" style="background-color: white;">
 		<!--Begin 顶部导航 + 搜索Bar-->
 		<header class="mui-bar mui-bar-nav" style="background-color: #0A3A81;">
@@ -21,27 +21,27 @@
 			</h1>
 		</header>
 		<div style="height: 45px;"></div>
-		
+
 		<ul class="mui-table-view" style="font-size: 13px;padding-top: 20px;">
-		    
-		    <li class="mui-table-view-cell" style="position: initial;padding: 5px 15px;">
-		    		<div >机具状态：</div>
+
+			<li class="mui-table-view-cell" style="position: initial;padding: 5px 15px;">
+				<div>机具状态：</div>
 				<div style="background-color: rgba(242, 242, 242, 1);padding: 10px 5px 10px 5px;">
 					<button type="button" class="mui-btn mui-btn-outlined" style="font-size: 14px;border-color: #000000;padding: 3px 15px;background-color: white;">正常</button>
 					<button type="button" class="mui-btn mui-btn-outlined" style="font-size: 14px;border-color: #000000;padding: 3px 15px;background-color: white;">暂停</button>
 					<button type="button" class="mui-btn mui-btn-outlined" style="font-size: 14px;border-color: #000000;padding: 3px 15px;background-color: white;">撤机</button>
-				</div>		 
-				
-		    </li>
-		    <li class="mui-table-view-cell" style="position: initial;padding: 5px 15px;">
-		    		<div >故障类型：</div>
+				</div>
+
+			</li>
+			<li class="mui-table-view-cell" style="position: initial;padding: 5px 15px;">
+				<div>故障类型：</div>
 				<div style="background-color: rgba(242, 242, 242, 1);padding: 5px 5px 0px 5px;">
 					<button type="button" class="mui-btn mui-btn-outlined" style="font-size: 12px;border-color: #000000;padding: 2px 5px;background-color: white;">&nbsp;读卡器&nbsp;</button>
 					<button type="button" class="mui-btn mui-btn-outlined" style="font-size: 12px;border-color: #000000;padding: 2px 5px;background-color: white;">客户键盘</button>
 					<button type="button" class="mui-btn mui-btn-outlined" style="font-size: 12px;border-color: #000000;padding: 2px 5px;background-color: white;">出钞模块</button>
 					<button type="button" class="mui-btn mui-btn-outlined" style="font-size: 12px;border-color: #000000;padding: 2px 5px;background-color: white;">&nbsp;打印机&nbsp;</button>
 					<button type="button" class="mui-btn mui-btn-outlined" style="font-size: 12px;border-color: #000000;padding: 2px 5px;background-color: white;">&nbsp;&nbsp;其它&nbsp;&nbsp;</button>
-				</div>		 
+				</div>
 				<div style="background-color: rgba(242, 242, 242, 1);padding: 5px 5px 5px 5px;">
 					<button type="button" class="mui-btn mui-btn-outlined" style="font-size: 12px;border-color: #000000;padding: 2px 5px;background-color: white;">&nbsp;&nbsp;&nbsp;通讯&nbsp;&nbsp;&nbsp;</button>
 					<button type="button" class="mui-btn mui-btn-outlined" style="font-size: 12px;border-color: #000000;padding: 2px 5px;background-color: white;">&nbsp;&nbsp;显示器&nbsp;</button>
@@ -49,42 +49,42 @@
 					<button type="button" class="mui-btn mui-btn-outlined" style="font-size: 12px;border-color: #000000;padding: 2px 5px;background-color: white;">&nbsp;&nbsp;监控&nbsp;&nbsp;</button>
 					<button type="button" class="mui-btn mui-btn-outlined" style="font-size: 12px;border-color: #000000;padding: 2px 5px;background-color: white;">&nbsp;&nbsp;&nbsp;&nbsp;PM&nbsp;&nbsp;&nbsp;&nbsp;</button>
 				</div>
-		    </li>
-		    	<li class="mui-table-view-cell" style="position: initial;padding: 10px 15px 3px 15px;color: #999999;">
-		    		<div style="">派单员故障信息备注：</div>
-		    		<div style="">XXXXXXXX坏了</div>
-		    	</li>
-		    	<li class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
-		    		<img style="width: 30%;" src="../img/123.png" />
-		    		
-		    	</li>
-		    	 <li class="mui-table-view-cell" style="position: initial;padding:  10px 15px 3px 15px;color: #999999;">
-		    		<div style="">维护人员故障信息备注：</div>
-		    		<div style="">XXXXXXXX确实坏了</div>
-		    	</li>
-		    	<li class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
-		    		<img style="width: 30%;" src="../img/123.png" />
-		    		
-		    	</li>
-		     <li class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
-		    		<div style="padding: 10px 0px;">维修照片：</div>
-		    		<div style="background-color: rgba(242, 242, 242,1);padding: 10px 3px;color: #666666;">维修前</div>
-		    	</li>
-		    	<li class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
-		    		<img style="width: 24%;" src="../img/123.png" />
-		    		<img style="width: 24%;" src="../img/123.png" />
-		    		<img style="width: 24%;" src="../img/123.png" />
-		    		<img style="width: 24%;" src="../img/123.png" />
-		    	</li>
-		    	 <li class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
-		    		<div style="background-color: rgba(242, 242, 242,1);padding: 10px 3px;color: #666666;">维修前</div>
-		    	</li>
-		    	<li class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
-		    		<img style="width: 24%;" src="../img/123.png" />
-		    		<img style="width: 24%;" src="../img/123.png" />
-		    		<img style="width: 24%;" src="../img/123.png" />
-		    		<img style="width: 24%;" src="../img/123.png" />
-		    	</li>
+			</li>
+			<li class="mui-table-view-cell" style="position: initial;padding: 10px 15px 3px 15px;color: #999999;">
+				<div style="">派单员故障信息备注：</div>
+				<div style="">XXXXXXXX坏了</div>
+			</li>
+			<li class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
+				<img style="width: 30%;" src="../img/123.png" />
+
+			</li>
+			<li class="mui-table-view-cell" style="position: initial;padding:  10px 15px 3px 15px;color: #999999;">
+				<div style="">维护人员故障信息备注：</div>
+				<div style="">XXXXXXXX确实坏了</div>
+			</li>
+			<li class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
+				<img style="width: 30%;" src="../img/123.png" />
+
+			</li>
+			<li class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
+				<div style="padding: 10px 0px;">维修照片：</div>
+				<div style="background-color: rgba(242, 242, 242,1);padding: 10px 3px;color: #666666;">维修前</div>
+			</li>
+			<li class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
+				<img style="width: 24%;" src="../img/123.png" />
+				<img style="width: 24%;" src="../img/123.png" />
+				<img style="width: 24%;" src="../img/123.png" />
+				<img style="width: 24%;" src="../img/123.png" />
+			</li>
+			<li class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
+				<div style="background-color: rgba(242, 242, 242,1);padding: 10px 3px;color: #666666;">维修前</div>
+			</li>
+			<li class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
+				<img style="width: 24%;" src="../img/123.png" />
+				<img style="width: 24%;" src="../img/123.png" />
+				<img style="width: 24%;" src="../img/123.png" />
+				<img style="width: 24%;" src="../img/123.png" />
+			</li>
 		</ul>
 		<div style="height: 50px;"></div>
 		<!--Begin 底部bar-->
@@ -111,14 +111,19 @@
 			</a>
 		</nav>
 		<!--End 底部bar-->
-		
+
 	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/vue.js"></script>
+	<script src="../js/vue-tap.js"></script>
+	<script src="../js/common.js"></script>
 	<script type="text/javascript">
 		var vm = new Vue({
 			el: '#app',
 			data: {
-				'title':'进度详情'
+				'title': '进度详情'
 			}
 		})
 	</script>
+
 </html>

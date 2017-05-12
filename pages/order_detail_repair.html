@@ -6,8 +6,6 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>{{ title }}</title>
 		<script src="../js/mui.min.js"></script>
-		<script src="../js/vue.js"></script>
-		<script src="../js/vue-tap.js"></script>
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<link href="../css/common.css" rel="stylesheet" />
 		<style type="text/css">
@@ -49,7 +47,7 @@
 		<div style="height: 10px;"></div>
 		<ul class="mui-table-view" style="font-size: 13px;color: #999999;">
 
-			<li class="mui-table-view-cell" style="position: initial;padding: 3px 15px 3px 15px;">
+			<li link="map_container.html?title=器材地址" class="mui-table-view-cell" style="position: initial;padding: 3px 15px 3px 15px;">
 				<div style="float: left;padding: 10px;">器材地址： </div>
 				<div style="float: left;padding: 10px;">XXXXXXX</div>
 				<div class="mui-icon mui-icon-location" style="float: right;padding: 10px;"></div>
@@ -123,14 +121,21 @@
 		</ul>
 
 		<div style="height: 10px;"></div>
-		<button type="button" class="mui-btn" style="width: 100%;height: 45px;margin: 0px;border: none;background-color: #0A3A81;color: white;">
+		<button v-tap="reciveOrder" type="button" class="mui-btn" style="width: 100%;height: 45px;margin: 0px;border: none;background-color: #0A3A81;color: white;">
 			接单
 		</button>
 
 	</body>
+	<script src="../js/vue.js"></script>
+	<script src="../js/vue-tap.js"></script>
 	<script src="../js/common.js"></script>
 	<script type="text/javascript">
 		var vm = new Vue({
+			methods:{
+				'reciveOrder':function(){
+					redirect('order_progress_detail.html');
+				}
+			},
 			el: '#app',
 			data: {
 				'title': '订单详情-维修中'
