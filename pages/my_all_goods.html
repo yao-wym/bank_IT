@@ -25,17 +25,29 @@
 		</header>
 		<header class="mui-bar mui-bar-nav" style="margin-top: 44px;background-color: white;color: #CCCCCC;">
 			<div class="mui-input-row mui-search">
-				<input type="search" class="mui-input-clear" placeholder="">
+				<input id="search-input" type="search" class="mui-input-clear" placeholder="">
 			</div>
 		</header>
 	</body>
+	<script src="../js/api.js"></script>
 	<script src="../js/common.js"></script>
 	<script type="text/javascript">
-		var sub = plus.webview.create("goods_search_sub.html", "goods_search_sub.html", {
-			top: '90px',
-			bottom: "0px"
-		});
-		plus.webview.currentWebview().append(sub)
+		mui.plusReady(function() {
+			var sub = plus.webview.create("my_all_goods_sub.html", "my_all_goods_sub.html", {
+				top: '90px',
+				bottom: "0px"
+			});
+			plus.webview.currentWebview().append(sub)
+			search_input = document.getElementById('search-input')
+			search_input.addEventListener('keyup', function(e) {
+					if (e.keyCode == 13) {
+						mui.fire(sub, 'pullGoodsList', {
+							'keyword': search_input.value
+						});
+					}
+				});
+		})
+		
 		var vm = new Vue({
 			el: '#app',
 			data: {

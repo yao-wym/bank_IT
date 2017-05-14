@@ -1,17 +1,19 @@
-self = plus.webview.currentWebview()
-self.addEventListener('show', function() {
-	var current = self.id;
-	if(['index_recive.html', 'index_order.html', 'index_check.html', 'index_message.html', 'index_ucenter.html'].indexOf(current) >= 0) {
-		var main = plus.webview.getLaunchWebview();
-		console.log('show ' + current.id);
-		mui.fire(main, 'init_header', {
-			'title': document.getElementsByTagName('title')[0].innerText
-		});
-	}
-});
+mui.plusReady(function() {
+	self = plus.webview.currentWebview()
+	self.addEventListener('show', function() {
+		var current = self.id;
+		if(['index_recive.html', 'index_order.html', 'index_check.html', 'index_message.html', 'index_ucenter.html'].indexOf(current) >= 0) {
+			var main = plus.webview.getLaunchWebview();
+			console.log('show ' + current.id);
+			mui.fire(main, 'init_header', {
+				'title': document.getElementsByTagName('title')[0].innerText
+			});
+		}
+	});
+})
 mui('body').on('tap', 'a,li,div', function(e) {
 	var targetTab_url = this.getAttribute('link');
-	if(!targetTab_url){
+	if(!targetTab_url) {
 		return;
 	}
 	targetTab = targetTab_url.split("?")[0];
@@ -21,13 +23,14 @@ mui('body').on('tap', 'a,li,div', function(e) {
 		var page = plus.webview.getWebviewById(targetTab);
 		if(!page) {
 			console.log('open new page ' + targetTab);
+			console.log('params:'+JSON.stringify(params));
 			mui.openWindow({
 				url: targetTab,
 				id: targetTab,
 				styles: {
 					top: '0px'
 				},
-				extras:params
+				extras: params
 			});
 		} else {
 			console.log('page ' + targetTab + ' is loaded');
@@ -50,7 +53,7 @@ function redirect(pageFullUrl) {
 			styles: {
 				top: '0px'
 			},
-			extras:params
+			extras: params
 		});
 	} else {
 		console.log('page ' + pageUrl + ' is loaded');
@@ -58,13 +61,24 @@ function redirect(pageFullUrl) {
 	}
 }
 bank = {
-	"post":function(url, data, callback) {
+	"post": function(url, data, callback) {
+		console.log(url); 
+		authCookie = localStorage.getItem('authCookie')?localStorage.get('authCookie'):'1';
+		console.log('authCookie='+authCookie);
+		data['authCookie'] = authCookie;
+		if(!params['uid']){
+			params['uid'] = localStorage.getItem('uid');
+		}
+		if(!params['sid']){
+			params['sid'] = '1232eds';
+		}
 		mui.ajax({
 			url: url,
 			type: 'post',
 			data: data,
 			dataType: 'json',
 			success: function(res) {
+				console.log('current page = '+self.id+' response='+JSON.stringify(res));
 				if(res.code == 200) {
 					if(callback) {
 						callback(res.data);
@@ -78,14 +92,26 @@ bank = {
 			}
 		})
 	},
-	"get":function(url, params, callback) {
+	"get": function(url, params, callback) {
+		console.log(url); 
+		authCookie = localStorage.getItem('authCookie')?localStorage.get('authCookie'):'1';
+		
+		params['authCookie'] = authCookie;
+		if(!params['uid']){
+			params['uid'] = localStorage.getItem('uid');
+		}
+		if(!params['sid']){
+			params['sid'] = '1232eds';
+		}
+		console.log('current page = '+self.id+' getParams='+JSON.stringify(params));
 		mui.ajax({
 			url: url,
-			type: 'get',
+			type: 'GET',
 			data: params,
 			dataType: 'json',
 			success: function(res) {
-				if(res.code == 200) {
+				console.log('current page = '+self.id+' data='+JSON.stringify(res));
+				if(res.code == 'A00001') {
 					if(callback) {
 						callback(res.data);
 					}
@@ -100,22 +126,24 @@ bank = {
 	}
 }
 
-function GetQueryString(name)
-{
-     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-     var r = window.location.search.substr(1).match(reg);
-     if(r!=null)return  unescape(r[2]); return null;
+function GetQueryString(name) {
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+	var r = window.location.search.substr(1).match(reg);
+	if(r != null) return unescape(r[2]);
+	return null;
 }
+
 function parseQueryString(url) {
- var reg_url = /^[^\?]+\?([\w\W]+)$/,
-  reg_para = /([^&=]+)=([\w\W]*?)(&|$|#)/g,
-  arr_url = reg_url.exec(url),
-  ret = {};
- if (arr_url && arr_url[1]) {
-  var str_para = arr_url[1], result;
-  while ((result = reg_para.exec(str_para)) != null) {
-   ret[result[1]] = result[2];
-  }
- }
- return ret;
+	var reg_url = /^[^\?]+\?([\w\W]+)$/,
+		reg_para = /([^&=]+)=([\w\W]*?)(&|$|#)/g,
+		arr_url = reg_url.exec(url),
+		ret = {};
+	if(arr_url && arr_url[1]) {
+		var str_para = arr_url[1],
+			result;
+		while((result = reg_para.exec(str_para)) != null) {
+			ret[result[1]] = result[2];
+		}
+	}
+	return ret;
 }

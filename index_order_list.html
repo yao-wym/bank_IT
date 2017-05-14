@@ -8,6 +8,7 @@
 		<script src="js/mui.js"></script>
 		<script src="js/vue.js"></script>
 		<script src="js/vue-tap.js"></script>
+		<script src="js/api.js"></script>
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link href="css/common.css" rel="stylesheet" />
 		<style type="text/css">
@@ -42,7 +43,7 @@
 		var vm = new Vue({
 			el: '#refreshContainer',
 			methods: {
-				showDetail(order) {
+				showDetail:function(order){
 					if(order.status == '已出发') {
 						redirect('pages/order_detail_out.html');
 					} else if(order.status == '维修中') {

@@ -15,11 +15,12 @@
 	</body>
 	<script src="js/common.js"></script>
 	<script type="text/javascript">
-		var sub = plus.webview.create("index_message_sub.html", "index_message_sub.html", {
-			top: '0px',
-			bottom: "0px"
-		});
-		plus.webview.currentWebview().append(sub)
+		mui.plusReady(function() {
+			var sub = plus.webview.create("index_message_sub.html", "index_message_sub.html", {
+				top: '0px',
+				bottom: "0px"
+			});
+			plus.webview.currentWebview().append(sub);
+		})
 	</script>
-
 </html>

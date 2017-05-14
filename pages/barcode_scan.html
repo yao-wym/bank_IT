@@ -6,6 +6,7 @@
 		<meta name="HandheldFriendly" content="true" />
 		<meta name="MobileOptimized" content="320" />
 		<title>{{title}}</title>
+		<script type="text/javascript" src="../js/mui.js"></script>
 		<script type="text/javascript" src="../js/vue.js"></script>
 		<script type="text/javascript" src="../js/vue-tap.js"></script>
 		<script type="text/javascript" src="../js/base.js"></script>
@@ -34,7 +35,7 @@
 				}, false);
 				// 显示页面并关闭等待框
 				ws.show('pop-in');
-				wo.evalJS('closeWaiting()');
+				//wo.evalJS('closeWaiting()');
 			}
 			if(window.plus) {
 				plusReady();

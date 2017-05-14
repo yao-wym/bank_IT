@@ -7,6 +7,7 @@
 		<title>我的</title>
 		<script src="js/mui.min.js"></script>
 		<script src="js/vue.js"></script>
+		<script src="js/vue-tap.js"></script>
 		<script src="js/api.js"></script>
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link href="css/common.css" rel="stylesheet" />
@@ -56,13 +57,13 @@
 		<div class="mui-content" style="background-color: #f5f8ff;padding: 0 5px">
 			<div style="background-color: white;position: relative;">
 				<div style="height: 150px;background-color: #567ffb;text-align: center;">
-					<img src="img/user-gray.png" border=0 style="margin-top: 40px;border-radius: 50%;background-color: white;" />
+					<img v-bind:src="icon" border=0 style="margin-top: 40px;border-radius: 50%;background-color: white;" />
 					<p style="color: white;">{{username}}</p>
 				</div>
 				<div class="mui-btn bg" style="color: white;background-color:#feb53b;border: none;border-radius: 10px;width: 90%;margin:5px 0 5px 5%;">
-					<div style="margin-right: 10px;">
+					<div v-tap="changeWorkStatus" style="margin-right: 10px;">
 						<img src="img/shangban.png" width="18px" style="margin-right: 5px;position: relative;top:3px" />
-						<span>上班</span>
+						<span>{{workStatus}}</span>
 					</div>
 				</div>
 				<img src="img/bolang.png" alt="" style="position: absolute;bottom:44px;left:0px;width: 100%;" />
@@ -75,7 +76,7 @@
 					</a>
 				</li>
 				<li class="mui-table-view-cell" style="margin-top: 10px;">
-					<a style="overflow: hidden;" class="mui-navigate-right" link="pages/goods_search.html">
+					<a style="overflow: hidden;" class="mui-navigate-right" link="pages/my_all_goods.html">
 						<img src="img/kufang.png" />
 						<span>我的库房</span>
 					</a>
@@ -99,7 +100,7 @@
 					</a>
 				</li>
 				<li style="margin-top: 10px;" class="mui-table-view-cell">
-					<a style="overflow: hidden;" class="mui-navigate-right" link="pages/my_comments.html">
+					<a style="overflow: hidden;" class="mui-navigate-right" link="pages/my_comments.html?uid={{uid}}">
 						<img class="" src="img/edit.png" />
 						<span>我的评价</span>
 					</a>
@@ -114,24 +115,34 @@
 		<script src="js/common.js"></script>
 		<script>
 			var vm = new Vue({
-			el: '#app',
-			data: {
-				username: '小涛',
-			},
-			watch: {
-				
-			}
-		})
-			
+				methods:{
+					changeWorkStatus:function(){
+						this.workStatus=this.workStatus=='下班'?'上班':'下班';
+					}
+				},
+				el: '#app',
+				data: {
+					username: '',
+					workStatus:'上班',
+					uid:''
+				},
+				watch: {
+
+				}
+			})
+
 			function initUserInfo(user) {
-				vm.username = user.name;
+				vm.username = user.name; 
+				vm.icon = user.icon;
+				vm.uid = user.uid;
+				localStorage.setItem('uid',user.uid);
 			}
 			mui.plusReady(function() {
 				mui.init();
 				bank.get(USER_INFO_API, {
-					"uid": 1,
-					"authCookie": 1,
-					"field": 2
+					"uid": 0,
+					"authCookie": 12,
+					"field": 1
 				}, initUserInfo)
 			});
 		</script>

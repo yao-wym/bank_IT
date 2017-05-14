@@ -44,7 +44,7 @@
 				<ul v-show="pageType='search'" class="mui-table-view mui-table-view-chevron">
 					<li v-for="goods in goodsList" class="mui-table-view-cell mui-media" style="padding-right: 30px;">
 						<a href="javascript:;">
-							<img style="width: 60px;max-width: 60px;height: 60px;" class="mui-media-object mui-pull-left" src="{{goods.avatar}}">
+							<img style="width: 60px;max-width: 60px;height: 60px;" class="mui-media-object mui-pull-left" v-bind:src="goods.avatar">
 							<div class="mui-media-body">
 								<p>
 									<span style="display: inline-block;width: 70%;">{{goods.name}}-{{goods.type}}{{goods.status}}</span>
@@ -60,7 +60,7 @@
 				<ul v-show="pageType='choose'" class="mui-table-view mui-table-view-chevron">
 					<li v-for="goods in goodsList" class="mui-table-view-cell mui-media" style="padding-right: 30px;">
 						<a href="javascript:;">
-							<img style="width: 60px;max-width: 60px;height: 60px;" class="mui-media-object mui-pull-left" src="{{goods.avatar}}">
+							<img style="width: 60px;max-width: 60px;height: 60px;" class="mui-media-object mui-pull-left" v-bind:src="goods.avatar">
 							<div class="mui-media-body">
 								<p>
 									<span style="display: inline-block;width: 70%;">{{goods.name}}-{{goods.type}}{{goods.status}}</span>
@@ -84,12 +84,38 @@
 		</div>
 	</body>
 
+	<script src="../js/api.js"></script>
 	<script src="../js/common.js"></script>
 	<script type="text/javascript">
+		keyword = '';
+		mui.plusReady(function(){
+			pullGoodsList();
+		})
+		function pullGoodsList(){
+			vm.goodsList = [];
+			goodsList = [];
+			bank.get(GOODS_MINE_API,{search:keyword},function(res){
+				for(key in res.list){
+					goods = {};
+					goods['name'] = res.list[key]['partName'];
+					goods['count'] = res.list[key]['count'];
+					goods['goodsID'] = res.list[key]['ownCode'];
+					goods['type'] = res.list[key]['partsType'];
+					goods['sn'] = res.list[key]['sn'];
+					goods['avatar'] = res.list[key]['icon'];
+					goods['status'] = res.list[key]['status'];
+					goods['sum'] = 0;
+					goods['selected'] = false;
+					goodsList.push(goods);
+				}
+				vm.goodsList = goodsList;
+			});
+		}
+		window.addEventListener('pullGoodsList',function(e){keyword = e.detail.keyword;pullGoodsList()});
 		var vm = new Vue({
 			el: '#app',
 			methods: {
-				use_goods: function use_goods() {
+				use_goods: function() {
 					var choosedGoods = [];
 					for(var key in this.goodsList) {
 						goods = this.goodsList[key];
@@ -108,27 +134,7 @@
 			data: {
 				pageType: 'search',
 				sum: 0,
-				goodsList: [{
-					selected: false,
-					sum: 0,
-					name: 'xxx配件',
-					type: 'xxx型号',
-					status: '政策',
-					goodsID: 'sadw2123',
-					sn: 'd123d',
-					count: 12,
-					avatar: '../img/beijian.png'
-				}, {
-					selected: true,
-					sum: 0,
-					name: 'xxx配件',
-					type: 'xxx型号',
-					status: '政策',
-					goodsID: 'sadw2123',
-					sn: 'd123d',
-					count: 12,
-					avatar: '../img/beijian.png'
-				}],
+				goodsList: [],
 				orderType: 1
 			},
 		})

@@ -120,7 +120,7 @@
 					console.log(activeTab);
 					//更改当前活跃的选项卡
 					activeTab = targetTab;
-				});
+				}); 
 			}
 			/*
 			 * 首页返回键处理
@@ -153,6 +153,19 @@
 					title: '接单'
 				}
 			})
+		function clearPages(){
+				var all = plus.webview.all();
+					console.log("webviews" + all.length);
+					for (var i = 0; i < all.length; i++) {
+						console.log(all[i].id); 
+//						if(homePages[all[i].id] != 1&&plus.webview.currentWebview().id!=all[i].id){
+//							all[i].close();
+//						}
+					}
+			}
+		mui.plusReady(function(){
+			clearPages();
+		})
 	</script>
 
 </html>

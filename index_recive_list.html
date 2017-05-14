@@ -41,8 +41,8 @@
 	<script type="text/javascript">
 		var vm = new Vue({
 			el: '#refreshContainer',
-			methods: {
-				showDetail(order) {
+			methods: { 
+				showDetail:function(order) {
 					if(this.orderType == 1) {
 						redirect('pages/order_detail_wait.html');
 					} else if(this.orderType == 2) {

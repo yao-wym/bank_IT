@@ -14,13 +14,20 @@
 			.mui-table-view-cell p {
 				color: #333333;
 			}
-			.check-btn{
-				padding: 0px;width: 20px;height: 20px;display: inline-block;border: none;
+			
+			.check-btn {
+				padding: 0px;
+				width: 20px;
+				height: 20px;
+				display: inline-block;
+				border: none;
 			}
-			.unchoosed{
+			
+			.unchoosed {
 				background-color: #CCCCCC;
 			}
-			.choosed{
+			
+			.choosed {
 				background-color: #0062CC;
 			}
 		</style>
@@ -34,38 +41,75 @@
 		<div class="mui-scroll">
 			<!--数据列表-->
 			<ul v-show="pageType='search'" class="mui-table-view mui-table-view-chevron">
-				<li v-for="staff in staffList" class="mui-table-view-cell mui-media" style="padding-right: 30px;">
+				<li v-for="goods in goodsList" class="mui-table-view-cell mui-media" style="padding-right: 30px;">
 					<a href="javascript:;">
-						<img style="width: 60px;max-width: 60px;height: 60px;" class="mui-media-object mui-pull-left" src="{{staff.avatar}}">
+						<img style="width: 60px;max-width: 60px;height: 60px;" class="mui-media-object mui-pull-left" v-bind:src="goods.icon">
 						<div class="mui-media-body">
-							<p class='mui-ellipsis'>{{staff.name}}</p>
-							<p>
-								<span style="display: inline-block;width: 80%;">编号：{{staff.staffID}}</span>
-								<input style="display: inline-block;width: 20%;color: deepskyblue;" name="radio1" type="radio">
+							<p class='mui-ellipsis'>
+								<div style="display: inline-block;width: 80%;">
+									{{goods.name}}-{{goods.type}}-{{goods.status}}
+								</div>
+								<div style="display: inline-block;width: 20%;font-size: 12px;">
+									数量:{{goods.count}}
+								</div>
 							</p>
-							<p class='mui-ellipsis'>电话：{{staff.phone}}</p>
-							<p class='mui-ellipsis'>电话：{{staff.phone}}</p>
+							<p>
+								<div  style="display: inline-block;width: 80%;">
+									<p>编号：{{goods.goodsID}}</p>
+									<p>序列号：{{goods.sn}}</p> 
+									<p class='mui-ellipsis'>所有者:{{goods.owner}} 电话:{{goods.phone}}</p>
+								</div>
+								<div style="display: inline-block;width: 20%;">
+									<img style="width: 30px;height: 33px;" src="../img/blue_location.png"/>
+									<p>{{goods.distance}}</p>
+								</div>
+							</p>
 						</div>
 					</a>
 				</li>
 			</ul>
 		</div>
 	</div>
+	<script src="../js/api.js"></script>
 	<script src="../js/common.js"></script>
 	<script type="text/javascript">
+		keyword = '';
+		goodsList = [];
+		mui.plusReady(function() {
+			pullGoodsList();
+		})
+
+		function pullGoodsList() {
+			vm.goodsList = [];
+			bank.get(GOODS_SEARCH_API, {
+				search: keyword
+			}, function(res) {
+				for(key in res.list) {
+					goods = {};
+					goods['name'] = res.list[key]['partsName'];
+					goods['count'] = res.list[key]['count'];
+					goods['goodsID'] = res.list[key]['ownCode'];
+					goods['type'] = res.list[key]['partsType'];
+					goods['sn'] = res.list[key]['sn'];
+					goods['icon'] = res.list[key]['icon'];
+					goods['status'] = res.list[key]['status'];
+					goods['distance'] = res.list[key]['distance'];
+					goods['phone'] = res.list[key]['phone'];
+					goods['owner'] = res.list[key]['engineerName'];
+					goods['sum'] = 0;
+					goods['selected'] = false;
+					goodsList.push(goods);
+				}
+				vm.goodsList = goodsList;
+			});
+		}
 		var vm = new Vue({
 			el: '#refreshContainer',
 			data: {
 				pageType: 'search',
-				title: '派单',
+				title: '库存全局查询',
 				sum: 0,
-				staffList: [{
-					sum:0,
-					name: '库房1',
-					staffID: 'sadw2123',
-					phone: '13041022978',
-					avatar: '../img/user-default.jpg'
-				}],
+				goodsList: [],
 				orderType: 1
 			},
 		})

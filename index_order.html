@@ -23,11 +23,13 @@
 	</body>
 	<script src="js/common.js"></script>
 	<script type="text/javascript">
-		var sub = plus.webview.create("index_order_list.html", "index_order_list.html", {
+		mui.plusReady(function(){
+			sub = plus.webview.create("index_order_list.html", "index_order_list.html", {
 			top: '50px',
 			bottom: "0px"
 		});
-		plus.webview.currentWebview().append(sub)
+			plus.webview.currentWebview().append(sub)
+		}) 
 		var vm = new Vue({
 			el: '#app',
 			data: {

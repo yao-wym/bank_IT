@@ -25,11 +25,14 @@
 	</body>
 	<script src="../js/common.js"></script>
 	<script type="text/javascript">
-		var sub = plus.webview.create("my_comments_sub.html", "my_comments_sub.html", {
-			top: '44px',
-			bottom: "0px"
-		});
-		self.append(sub)
+		mui.plusReady(function() {
+			var sub = plus.webview.create("my_comments_sub.html", "my_comments_sub.html", {
+				top: '44px',
+				bottom: "0px",
+			});
+			self.append(sub)
+		})
+
 		var vm = new Vue({
 			el: '#app',
 			data: {

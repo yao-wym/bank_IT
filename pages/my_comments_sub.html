@@ -20,37 +20,47 @@
 		<div class="mui-scroll">
 			<!--数据列表-->
 			<ul class="mui-table-view">
-					<li  v-for="comment in comments" class="mui-table-view-cell mui-media">
-						<a href="javascript:;">
-							<img style="border-radius: 50%;" class="mui-media-object mui-pull-left" src="{{comment.avatar}}">
-							<div class="mui-media-body">
-								<p>
-									<span style="display: inline-block;width: 20%;">{{comment.username}}</span>
-									<span style="display: inline-block;width: 55%;">
-										<i v-for="index in comment.star" class="mui-icon mui-icon-star"></i>
+				<li v-for="comment in comments" class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<img style="border-radius: 50%;" class="mui-media-object mui-pull-left" v-bind:src="comment.icon">
+						<div class="mui-media-body">
+							<p>
+								<span style="display: inline-block;width: 20%;">{{comment.name}}</span>
+								<span style="display: inline-block;width: 52%;">
+										<i v-for="index in comment.point" track-by="$index" class="mui-icon mui-icon-star"></i>
 									</span>
-									<span style="display: inline-block;width: 20%;">{{comment.time}}</span>
-								</p>
-								<p class='mui-ellipsis'>{{comment.content}}</p>
-							</div>
-						</a>
-					</li>
+								<span style="display: inline-block;width: 25%;">{{comment.date}}</span>
+							</p>
+							<p class='mui-ellipsis'>{{comment.note}}</p>
+						</div>
+					</a>
+				</li>
 			</ul>
 		</div>
 	</div>
+	<script src="../js/api.js"></script>
 	<script src="../js/common.js"></script>
 	<script type="text/javascript">
+		mui.plusReady(function() {
+
+		})
+
+		function pullComments() {
+			bank.get(COMMENTS_LIST_API, {
+				uid: self.parent().uid
+			}, function(res) {
+				for(var key in res.list) {
+					res.list[key]['point'] = new Array(parseInt(res.list[key]['point']));
+				}
+				vm.comments = res.list;
+				mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+			})
+		}
 		var vm = new Vue({
 			el: '#refreshContainer',
 			data: {
 				title: '评价',
-				comments: [{
-					username:'wym',
-					content:'吼啊',
-					star:4,
-					time:'一天前',
-					avatar:'../img/default.png'
-				}, {}]
+				comments: []
 			},
 
 		})
@@ -65,15 +75,11 @@
 					contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
 					contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
 					callback: function() {
-						mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+						pullComments();
 					} //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
 				}
 			}
 		})
-		window.addEventListener("change_type", function(e) {
-			console.log(JSON.stringify(e.detail.type));
-			vm.orderType = e.detail.type;
-		});
 	</script>
 
 </html>

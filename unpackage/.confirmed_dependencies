@@ -1,1 +1,324 @@
-null
+{
+	"index_ucenter.html": {
+		"resources": [
+			"img/user-info.png",
+			"img/kufang.png",
+			"img/shangban.png",
+			"img/kufangchaxun.png",
+			"img/dairuku.png",
+			"img/bolang.png",
+			"img/user-gray.png",
+			"img/edit.png",
+			"js/api.js",
+			"img/daichuku.png",
+			"fonts/mui.ttf",
+			"js/common.js",
+			"js/vue.js",
+			"js/mui.min.js",
+			"css/common.css",
+			"css/mui.min.css",
+			"js/vue-tap.js"
+		],
+		"refer": [
+			"pages/my_used_goods.html",
+			"pages/goods_search.html",
+			"pages/all_goods.html",
+			"pages/my_comments.html"
+		]
+	},
+	"index.html": {
+		"resources": [
+			"js/common.js",
+			"js/vue.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"index_recive.html"
+		],
+		"refer": [
+			"index_order.html",
+			"index_ucenter.html",
+			"pages/my_info.html",
+			"index_check.html",
+			"index_message.html",
+			"index_recive.html",
+			"pages/create_work_order.html"
+		]
+	},
+	"index_check.html": {
+		"resources": [
+			"index_check_list.html",
+			"js/vue-tap.js",
+			"css/common.css",
+			"js/mui.js",
+			"js/common.js",
+			"js/vue.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"index_check_list.html"
+		]
+	},
+	"index_message.html": {
+		"resources": [
+			"css/common.css",
+			"js/mui.js",
+			"js/common.js",
+			"js/vue.js",
+			"css/mui.min.css",
+			"fonts/mui.ttf",
+			"index_message_sub.html"
+		],
+		"refer": [
+			"index_message_sub.html"
+		]
+	},
+	"index_recive.html": {
+		"resources": [
+			"index_recive_list.html",
+			"js/mui.js",
+			"js/vue-tap.js",
+			"css/common.css"
+		],
+		"refer": [
+			"index_recive_list.html"
+		]
+	},
+	"pages/my_info.html": {
+		"resources": [
+			"js/common.js",
+			"js/vue.js",
+			"css/common.css",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"fonts/mui.ttf"
+		]
+	},
+	"index_order.html": {
+		"resources": [
+			"js/vue-tap.js",
+			"js/common.js",
+			"js/vue.js",
+			"css/common.css",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"index_order_list.html",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"index_order_list.html"
+		]
+	},
+	"index_message_sub.html": {
+		"resources": [
+			"img/xiaoxi2.png",
+			"js/common.js",
+			"js/vue.js",
+			"css/common.css",
+			"css/mui.min.css",
+			"js/mui.js",
+			"js/vue-tap.js"
+		]
+	},
+	"index_order_list.html": {
+		"resources": [
+			"js/common.js",
+			"js/vue.js",
+			"css/common.css",
+			"css/mui.min.css",
+			"js/mui.js",
+			"js/vue-tap.js",
+			"js/api.js"
+		],
+		"refer": [
+			"pages/order_detail_repair.html"
+		]
+	},
+	"index_recive_list.html": {
+		"resources": [
+			"js/common.js",
+			"js/vue.js",
+			"css/common.css",
+			"css/mui.min.css",
+			"js/mui.js",
+			"js/vue-tap.js"
+		],
+		"refer": [
+			"pages/order_detail_wait.html"
+		]
+	},
+	"pages/order_detail_wait.html": {
+		"resources": [
+			"fonts/mui.ttf"
+		]
+	},
+	"index_check_list.html": {
+		"refer": [
+			"pages/login.html"
+		]
+	},
+	"pages/login.html": {
+		"resources": [
+			"js/common.js",
+			"js/vue.js",
+			"js/mui.min.js",
+			"css/common.css",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/vue-tap.js"
+		]
+	},
+	"pages/my_used_goods.html": {
+		"resources": [
+			"js/common.js",
+			"js/vue.js",
+			"css/common.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/vue-tap.js",
+			"pages/my_used_goods_sub.html"
+		],
+		"refer": [
+			"pages/my_used_goods_sub.html"
+		]
+	},
+	"pages/order_detail_repair.html": {
+		"resources": [
+			"js/common.js",
+			"js/vue.js",
+			"css/common.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/vue-tap.js"
+		]
+	},
+	"pages/goods_search.html": {
+		"resources": [
+			"js/common.js",
+			"js/vue.js",
+			"css/common.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/vue-tap.js",
+			"pages/goods_search_sub.html",
+			"js/api.js"
+		],
+		"refer": [
+			"pages/goods_search_sub.html"
+		]
+	},
+	"pages/goods_search_sub.html": {
+		"resources": [
+			"js/mui.js",
+			"img/beijian.png",
+			"js/common.js",
+			"js/vue.js",
+			"css/common.css",
+			"css/mui.min.css",
+			"js/api.js",
+			"js/vue-tap.js"
+		],
+		"refer": [
+			"pages/staff_search.html"
+		]
+	},
+	"pages/staff_search.html": {
+		"resources": [
+			"js/common.js",
+			"js/vue.js",
+			"css/common.css",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"js/vue-tap.js",
+			"pages/staff_search_sub.html",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"pages/staff_search_sub.html"
+		]
+	},
+	"pages/staff_search_sub.html": {
+		"resources": [
+			"img/user-default.jpg",
+			"js/mui.js"
+		]
+	},
+	"pages/my_used_goods_sub.html": {
+		"resources": [
+			"js/mui.js",
+			"img/beijian.png"
+		]
+	},
+	"pages/all_goods.html": {
+		"resources": [
+			"js/common.js",
+			"js/vue.js",
+			"css/common.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/vue-tap.js",
+			"pages/staff_search_sub.html"
+		],
+		"refer": [
+			"pages/staff_search_sub.html"
+		]
+	},
+	"pages/my_comments.html": {
+		"resources": [
+			"js/common.js",
+			"js/vue.js",
+			"css/common.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/vue-tap.js",
+			"pages/my_comments_sub.html"
+		],
+		"refer": [
+			"pages/my_comments_sub.html"
+		]
+	},
+	"pages/my_comments_sub.html": {
+		"resources": [
+			"img/default.png",
+			"js/mui.js",
+			"js/common.js",
+			"js/vue.js",
+			"css/common.css",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/vue-tap.js",
+			"js/api.js"
+		]
+	},
+	"pages/create_work_order.html": {
+		"resources": [
+			"js/common.js",
+			"js/vue.js",
+			"css/common.css",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"js/vue-tap.js",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"pages/barcode_scan.html"
+		]
+	},
+	"pages/barcode_scan.html": {
+		"resources": [
+			"js/base.js",
+			"css/mui.css",
+			"js/common.js",
+			"js/vue.js",
+			"css/common.css",
+			"fonts/mui.ttf",
+			"js/mui.js",
+			"js/vue-tap.js"
+		]
+	}
+}

@@ -1,4 +1,4 @@
-﻿{
+{
     "@platforms": ["android", "iPhone", "iPad"],
     "id": "H581C1B4D",/*应用的标识，创建应用时自动生成，勿手动修改*/
     "name": "banc_IT",/*应用名称，程序桌面图标名称*/
@@ -199,5 +199,425 @@
                 }
             }
         }
-    }
+    },
+	"dependencies": {
+		"pages": {
+			"index_ucenter.html": {
+				"resources": [
+					"img/user-info.png",
+					"img/kufang.png",
+					"img/shangban.png",
+					"img/kufangchaxun.png",
+					"img/dairuku.png",
+					"img/bolang.png",
+					"img/user-gray.png",
+					"img/edit.png",
+					"js/api.js",
+					"img/daichuku.png",
+					"fonts/mui.ttf",
+					"js/common.js",
+					"js/vue.js",
+					"js/mui.min.js",
+					"css/common.css",
+					"css/mui.min.css",
+					"js/vue-tap.js"
+				],
+				"refer": [
+					"pages/my_used_goods.html",
+					"pages/goods_search.html",
+					"pages/all_goods.html",
+					"pages/my_comments.html"
+				],
+				"priority": 0
+			},
+			"index.html": {
+				"resources": [
+					"js/common.js",
+					"js/vue.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"index_recive.html"
+				],
+				"refer": [
+					"index_order.html",
+					"index_ucenter.html",
+					"pages/my_info.html",
+					"index_check.html",
+					"index_message.html",
+					"pages/create_work_order.html"
+				],
+				"priority": 0
+			},
+			"index_check.html": {
+				"resources": [
+					"index_check_list.html",
+					"js/vue-tap.js",
+					"css/common.css",
+					"js/mui.js",
+					"js/common.js",
+					"js/vue.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"index_message.html": {
+				"resources": [
+					"css/common.css",
+					"js/mui.js",
+					"js/common.js",
+					"js/vue.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"index_message_sub.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"index_recive.html": {
+				"resources": [
+					"index_recive_list.html",
+					"js/mui.js",
+					"js/vue-tap.js",
+					"css/common.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/my_info.html": {
+				"resources": [
+					"js/common.js",
+					"js/vue.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"index_order.html": {
+				"resources": [
+					"js/vue-tap.js",
+					"js/common.js",
+					"js/vue.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"index_order_list.html",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"index_message_sub.html": {
+				"resources": [
+					"img/xiaoxi2.png",
+					"js/common.js",
+					"js/vue.js",
+					"css/common.css",
+					"css/mui.min.css",
+					"js/mui.js",
+					"js/vue-tap.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"index_order_list.html": {
+				"resources": [
+					"js/common.js",
+					"js/vue.js",
+					"css/common.css",
+					"css/mui.min.css",
+					"js/mui.js",
+					"js/vue-tap.js",
+					"js/api.js"
+				],
+				"refer": [
+					"pages/order_detail_repair.html"
+				],
+				"priority": 0
+			},
+			"index_recive_list.html": {
+				"resources": [
+					"js/common.js",
+					"js/vue.js",
+					"css/common.css",
+					"css/mui.min.css",
+					"js/mui.js",
+					"js/vue-tap.js"
+				],
+				"refer": [
+					"pages/order_detail_wait.html"
+				],
+				"priority": 0
+			},
+			"pages/order_detail_wait.html": {
+				"resources": [
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"index_check_list.html": {
+				"resources": [],
+				"refer": [
+					"pages/login.html"
+				],
+				"priority": 0
+			},
+			"pages/login.html": {
+				"resources": [
+					"js/common.js",
+					"js/vue.js",
+					"js/mui.min.js",
+					"css/common.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/vue-tap.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/my_used_goods.html": {
+				"resources": [
+					"js/common.js",
+					"js/vue.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/vue-tap.js",
+					"pages/my_used_goods_sub.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/order_detail_repair.html": {
+				"resources": [
+					"js/common.js",
+					"js/vue.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/vue-tap.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/goods_search.html": {
+				"resources": [
+					"js/common.js",
+					"js/vue.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/vue-tap.js",
+					"pages/goods_search_sub.html",
+					"js/api.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/goods_search_sub.html": {
+				"resources": [
+					"js/mui.js",
+					"img/beijian.png",
+					"js/common.js",
+					"js/vue.js",
+					"css/common.css",
+					"css/mui.min.css",
+					"js/api.js",
+					"js/vue-tap.js"
+				],
+				"refer": [
+					"pages/staff_search.html"
+				],
+				"priority": 0
+			},
+			"pages/staff_search.html": {
+				"resources": [
+					"js/common.js",
+					"js/vue.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/vue-tap.js",
+					"pages/staff_search_sub.html",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/staff_search_sub.html": {
+				"resources": [
+					"img/user-default.jpg",
+					"js/mui.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/my_used_goods_sub.html": {
+				"resources": [
+					"js/mui.js",
+					"img/beijian.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/all_goods.html": {
+				"resources": [
+					"js/common.js",
+					"js/vue.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/vue-tap.js",
+					"pages/staff_search_sub.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/my_comments.html": {
+				"resources": [
+					"js/common.js",
+					"js/vue.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/vue-tap.js",
+					"pages/my_comments_sub.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/my_comments_sub.html": {
+				"resources": [
+					"img/default.png",
+					"js/mui.js",
+					"js/common.js",
+					"js/vue.js",
+					"css/common.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/vue-tap.js",
+					"js/api.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/create_work_order.html": {
+				"resources": [
+					"js/common.js",
+					"js/vue.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/vue-tap.js",
+					"fonts/mui.ttf"
+				],
+				"refer": [
+					"pages/barcode_scan.html"
+				],
+				"priority": 0
+			},
+			"pages/barcode_scan.html": {
+				"resources": [
+					"js/base.js",
+					"css/mui.css",
+					"js/common.js",
+					"js/vue.js",
+					"css/common.css",
+					"fonts/mui.ttf",
+					"js/mui.js",
+					"js/vue-tap.js"
+				],
+				"refer": [],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"pages/component_note.html",
+				"pages/reset_password.html",
+				"img/接单-1@2x.png",
+				"img/-纸条@2x.png",
+				"pages/machine_tips.html",
+				"img/派单信息@3x.png",
+				"img/进度详情@2x.png",
+				"pages/barcode.html",
+				"img/我的-2@2x.png",
+				"login/reset_password.html",
+				"img/接单-2@3x.png",
+				"pages/goods_edit.html",
+				"img/时间精确@3x.png",
+				"img/-蓝色@3x.png",
+				"pages/map_container.html",
+				"login/login.html",
+				"img/返回-白色@2x.png",
+				"img/接单-2@2x.png",
+				"img/日期@2x.png",
+				"img/上班@2x.png",
+				"img/巡检-1@3x.png",
+				"img/5@2x.png",
+				"img/时间精确@2x.png",
+				"img/消息提醒@3x.png",
+				"img/箭头@3x.png",
+				"pages/work_order.html",
+				"pages/order_detail_group.html",
+				"pages/barcode_scan2.html",
+				"js/immersed.js",
+				"pages/order_detail_out.html",
+				"pages/order_progress_detail.html",
+				"pages/goods_edit_sub.html",
+				"img/-电话@2x.png",
+				"img/我的-2@3x.png",
+				"me/component_note.html",
+				"img/xiaoxi.png",
+				"img/消息提醒@2x.png",
+				"img/我的订单-2@2x.png",
+				"img/我的订单-1@2x.png",
+				"img/留言@2x.png",
+				"pages/my_recived_goods_sub.html",
+				"img/-纸条@3x.png",
+				"img/备件使用@2x.png",
+				"img/4@2x.png",
+				"img/巡检-2@3x.png",
+				"img/巡检-1@2x.png",
+				"img/我的订单-2@3x.png",
+				"img/消息-2@3x.png",
+				"img/2@2x.png",
+				"img/-电话@3x.png",
+				"pages/staff_detail.html",
+				"pages/all_goods_sub.html",
+				"img/派单信息@2x.png",
+				"img/3@2x.png",
+				"img/箭头@2x.png",
+				"img/进度详情@3x.png",
+				"img/日期@3x.png",
+				"pages/map_container_sub.html",
+				"img/波浪@2x.png",
+				"order/work_order.html",
+				"img/返回-白色@3x.png",
+				"img/接单-1@3x.png",
+				"img/我的-1@2x.png",
+				"pages/my_recived_goods.html",
+				"img/1@2x.png",
+				"me/my_info.html",
+				"img/-蓝色@2x.png",
+				"img/6@2x.png",
+				"img/留言@3x.png",
+				"img/消息-2@2x.png",
+				"img/我的订单-1@3x.png",
+				"img/巡检-2@2x.png",
+				"pages/component_edit.html"
+			]
+		}
+	},
+	"unpackage":[]
 }

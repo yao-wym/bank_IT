@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>接单</title>
+		<title>巡检</title>
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link href="css/common.css" rel="stylesheet" />
 	</head>
@@ -24,11 +24,11 @@
 			<div class="mui-scroll">
 				<!--数据列表-->
 				<ul class="mui-table-view mui-table-view-chevron" style="background-color: inherit;">
-					<li style="margin-top: 3px;background-color: white;" v-for="order in orderList[orderType]" track-by="$index" class="mui-table-view-cell">
-						<a link="pages/login.html" style="overflow: hidden;">
-							<p style="font-weight: bold;color: #333333">线路名称：{{name}}<span style="float: right;">已完成{{completeNum}}项 剩余{{todoNum}}</p>
-							<p style="font-size: 12px;">寻线日期：{{todo_time}}</p>
-							<p style="font-size: 12px;font-weight: 500;" v-for="engineer in engineers" class="list-col-2">
+					<li style="margin-top: 3px;background-color: white;" v-for="plan in planList" track-by="$index" class="mui-table-view-cell">
+						<a link="pages/route_detail.html" style="overflow: hidden;">
+							<p style="font-weight: bold;color: #333333">线路名称：{{plan.lineName}}<span style="float: right;">已完成{{plan.finish}}项 剩余{{plan.lefts}}</p>
+							<p style="font-size: 12px;">寻线日期：{{plan.pyear}}-{{plan.pmonth}}-{{plan.pdate}}</p>
+							<p style="font-size: 12px;font-weight: 500;" v-for="engineer in plan.engineers" class="list-col-2">
 								<span>工程师：{{engineer.name}}</span>
 								<span>电话：{{engineer.phone}}</span>
 							</p>
@@ -40,24 +40,62 @@
 		<script src="js/mui.js"></script>
 	<script src="js/vue.js"></script>
 	<script src="js/vue-tap.js"></script>
+	<script src="js/api.js"></script>
 	<script src="js/common.js"></script>
 	<script type="text/javascript">
+		keyword = 1;
+		function pullGoodsList() {
+			planList = [];
+			vm.planList = [];
+			bank.get(CHECK_LIST_API, {
+				field: vm.fieldType
+			}, function(res) {
+				for(key in res.list) {
+					plan = {};
+					plan['planId'] = res.list[key]['planId'];
+					plan['lineType'] = res.list[key]['lineType'];
+					plan['lineName'] = res.list[key]['lineName'];
+					plan['usrId'] = res.list[key]['usrId'];
+					plan['finish'] = res.list[key]['finish'];
+					plan['lefts'] = res.list[key]['lefts'];
+					plan['status'] = res.list[key]['status'];
+					plan['pdate'] = res.list[key]['pdate'];
+					plan['pmonth'] = res.list[key]['pmonth'];
+					plan['pyear'] = res.list[key]['pyear'];
+					plan['engineers'] = []
+					if(res.list[key]['names']){
+						var phones = [];
+						var names = res.list[key]['names'].split('，');
+						if(res.list[key]['phones']){
+							var phones  = res.list[key]['phones'].split(',');
+						}
+						for(var index in names){
+							var engineer = {};
+							engineer['name'] = names[index];
+							engineer['phone'] = phones[index];
+							plan['engineers'].push(engineer);
+						}
+					}
+					planList.push(plan);
+				}
+				vm.planList = planList;
+
+			});
+		}
+		mui.plusReady(function(){
+			pullGoodsList();
+		})
 		var vm = new Vue({
 			el: '#refreshContainer',
 			data: {
-				title: '接单',
-				name:'崇文门A',
-				completeNum:2,
-				todoNum:3,
-				todo_time:'2017.05.06 13:22',
-				engineers:[{name:'袁一帆',phone:'1304122978'},{name:'文耀民',phone:'1304122978'}],
-				orderList: {
-					'1': [2, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4],
-					'2': [12, 3, 4],
-					'3': [123, 3, 4],
-				},
-				orderType: 1
+				planList: {},
+				fieldType: 1
 			},
+			watch:{
+				fieldType:function(newVal,oldVal){
+						pullGoodsList();
+				}
+			}
 
 		})
 
@@ -78,7 +116,7 @@
 		})
 		window.addEventListener("change_type", function(e) {
 			console.log(JSON.stringify(e.detail.type));
-			vm.orderType = e.detail.type;
+			vm.fieldType = e.detail.type;
 		});
 	</script>
 	</body>

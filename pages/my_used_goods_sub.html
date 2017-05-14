@@ -84,8 +84,35 @@
 		</div>
 	</body>
 
+	<script src="../js/api.js"></script>
 	<script src="../js/common.js"></script>
 	<script type="text/javascript">
+		mui.plusReady(function() {
+			pullGoodsList();
+		})
+
+		function pullGoodsList() {
+			vm.goodsList = [];
+			goodsList = [];
+			bank.get(GOODS_OUT_API, {
+				
+			}, function(res) {
+				for(key in res.list) {
+					goods = {};
+					goods['name'] = res.list[key]['partName'];
+					goods['count'] = res.list[key]['count'];
+					goods['goodsID'] = res.list[key]['ownCode'];
+					goods['type'] = res.list[key]['partsType'];
+					goods['sn'] = res.list[key]['sn'];
+					goods['avatar'] = res.list[key]['icon'];
+					goods['status'] = res.list[key]['status'];
+					goods['sum'] = 0;
+					goods['selected'] = false;
+					goodsList.push(goods);
+				}
+				vm.goodsList = goodsList;
+			});
+		}
 		var vm = new Vue({
 			el: '#app',
 			methods: {
@@ -108,27 +135,7 @@
 			data: {
 				pageType: 'search',
 				sum: 0,
-				goodsList: [{
-					selected: false,
-					sum: 0,
-					name: 'xxx配件',
-					type: 'xxx型号',
-					status: '政策',
-					goodsID: 'sadw2123',
-					sn: 'd123d',
-					count: 12,
-					avatar: '../img/beijian.png'
-				}, {
-					selected: true,
-					sum: 0,
-					name: 'xxx配件',
-					type: 'xxx型号',
-					status: '政策',
-					goodsID: 'sadw2123',
-					sn: 'd123d',
-					count: 12,
-					avatar: '../img/beijian.png'
-				}],
+				goodsList: [],
 				orderType: 1
 			},
 		})
