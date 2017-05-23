@@ -47,7 +47,7 @@
 
 		function pullComments() {
 			bank.get(COMMENTS_LIST_API, {
-				uid: self.parent().uid
+				uid: self.parent.uid
 			}, function(res) {
 				for(var key in res.list) {
 					res.list[key]['point'] = new Array(parseInt(res.list[key]['point']));

@@ -5,7 +5,7 @@ HOST_ORDER = HOST_API+"e/order/";
 
 USER_INFO_API = HOST_USER+"info"
 
-ORDER_LIST_API = HOST_USER+"list"
+ORDER_LIST_API = HOST_ORDER+"list"
 
 COMMENTS_LIST_API = HOST_USER+"comment_list"
 

@@ -63,14 +63,14 @@ function redirect(pageFullUrl) {
 bank = {
 	"post": function(url, data, callback) {
 		console.log(url); 
-		authCookie = localStorage.getItem('authCookie')?localStorage.get('authCookie'):'1';
-		console.log('authCookie='+authCookie);
-		data['authCookie'] = authCookie;
-		if(!params['uid']){
-			params['uid'] = localStorage.getItem('uid');
+		token = localStorage.getItem('token')?localStorage.get('token'):'402848eb5bf02279015bf0369a73001';
+		console.log('token='+token);
+		data['token'] = token;
+		if(!data['uid']){
+			data['uid'] = localStorage.getItem('uid');
 		}
-		if(!params['sid']){
-			params['sid'] = '1232eds';
+		if(!data['sid']){
+			data['sid'] = '1232eds';
 		}
 		mui.ajax({
 			url: url,
@@ -94,11 +94,11 @@ bank = {
 	},
 	"get": function(url, params, callback) {
 		console.log(url); 
-		authCookie = localStorage.getItem('authCookie')?localStorage.get('authCookie'):'1';
+		token = localStorage.getItem('token')?localStorage.get('token'):'1';
 		
-		params['authCookie'] = authCookie;
-		if(!params['uid']){
-			params['uid'] = localStorage.getItem('uid');
+		params['token'] = token;
+		if(!params['account']){
+			params['account'] = localStorage.getItem('account');
 		}
 		if(!params['sid']){
 			params['sid'] = '1232eds';
