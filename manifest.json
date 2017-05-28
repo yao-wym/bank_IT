@@ -478,7 +478,8 @@
 					"css/mui.min.css",
 					"js/vue-tap.js",
 					"pages/staff_search_sub.html",
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"img/user-default.jpg"
 				],
 				"refer": [],
 				"priority": 0
@@ -681,7 +682,8 @@
 					"img/loading.gif"
 				],
 				"refer": [
-					"pages/machine_tips.html"
+					"pages/machine_tips.html",
+					"pages/staff_search.html"
 				],
 				"priority": 0
 			},

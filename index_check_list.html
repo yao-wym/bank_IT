@@ -21,10 +21,9 @@
 	<body id="app">
 
 		<header id="order-header" class="mui-bar mui-bar-nav" style="background-color: white;color: #CCCCCC;">
-			<div id="orderTab" class="mui-segmented-control mui-segmented-control-inverted">
-				<a v-tap="orderType=1" class="mui-control-item mui-active">进行中</a>
-				<a v-tap="orderType=3" class="mui-control-item">维修完成</a>
-				<a v-tap="orderType=4" class="mui-control-item">维修失败</a>
+			<div id="checkTab" class="mui-segmented-control mui-segmented-control-inverted">
+				<a v-tap="checkType=0" class="mui-control-item mui-active">已完成</a>
+				<a v-tap="checkType=1" class="mui-control-item">未完成</a>
 			</div>
 		</header>
 		<!--下拉刷新容器-->
@@ -32,7 +31,7 @@
 
 			<!--数据列表-->
 			<ul class="bank-list" style="padding: 0;">
-				<li style="margin-top: 3px;background-color: white;" v-for="plan in planList" track-by="$index" class="mui-table-view-cell">
+				<li style="margin-top: 3px;background-color: white;" v-for="plan in planList[checkType]" track-by="$index" class="mui-table-view-cell">
 					<a link="pages/route_detail.html" style="overflow: hidden;">
 						<p style="font-weight: bold;color: #333333">线路名称：{{plan.lineName}}<span style="float: right;">已完成{{plan.finish}}项 剩余{{plan.lefts}}</p>
 							<p style="font-size: 12px;">寻线日期：{{plan.pyear}}-{{plan.pmonth}}-{{plan.pdate}}</p>
@@ -55,13 +54,29 @@
 		keyword = 1;
 		page = 1;
 		size = 10
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				planList: {},
+				checkType: 0,
+				page: {
+					"0": 1,
+					"1": 1
+				},
+			},
+			watch: {
+				checkType: function(newVal, oldVal) {
+					pullGoodsList();
+				}
+			}
+
+		})
 
 		function pullGoodsList() {
 			planList = [];
-			vm.planList = [];
 			bank.get(CHECK_LIST_API, {
-				field: vm.fieldType,
-				page: page,
+				field: vm.checkType,
+				page: vm.page[vm.checkType],
 				size: size
 			}, function(res) {
 				for(key in res.list) {
@@ -92,30 +107,23 @@
 					}
 					planList.push(plan);
 				}
-				vm.planList = planList;
+				checkType = vm.checkType
+				obj = {};
+				for(var key in vm.planList){
+					obj[key] = vm.planList[key];
+				}
+				obj[checkType] = planList;
+				vm.planList = obj;
+			
+				console.log(JSON.stringify(vm.planList));
 				if(planList.length == size) {
-					page++;
+					vm.page[vm.checkType]++;
 				}
 
 			});
 		}
 		mui.plusReady(function() {
 			pullGoodsList();
-		})
-		var vm = new Vue({
-			el: '#app',
-			data: {
-				planList: {},
-				fieldType: 1,
-			},
-			watch: {
-				fieldType: function(newVal, oldVal) {
-					if(!planList[newVal]) {
-						pullGoodsList();
-					}
-				}
-			}
-
 		})
 
 		//		mui.init({
@@ -139,10 +147,10 @@
 		//				}
 		//			}
 		//		})
-		window.addEventListener("change_type", function(e) {
-			console.log(JSON.stringify(e.detail.type));
-			vm.fieldType = e.detail.type;
-		});
+		//		window.addEventListener("change_type", function(e) {
+		//			console.log(JSON.stringify(e.detail.type));
+		//			vm.checkTab = e.detail.type;
+		//		});
 	</script>
 
 </html>

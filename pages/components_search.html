@@ -36,9 +36,10 @@
 		mui.plusReady(function() {
 			sub = plus.webview.create("components_search_sub.html", "components_search_sub.html", {
 				top: '90px',
-				bottom: "0px"
+				bottom: "0px",
 			});
 			plus.webview.currentWebview().append(sub)
+			vm.currentType = plus.webview.currentWebview().type;
 			search_input = document.getElementById('search-input')
 			search_input.addEventListener('keyup', function(e) {
 				if(e.keyCode == 13) {
@@ -111,7 +112,7 @@
 		window.addEventListener("init_with_params", function(e) {
 			console.log("params = " + JSON.stringify(e.detail.params));
 			vm.currentType = e.detail.params.type;
-			console.log("listType=" + vm.currentType)
+			console.log("currentType=" + vm.currentType)
 			mui.fire(sub, 'change_type', {
 				'type': vm.currentType
 			});

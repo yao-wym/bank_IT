@@ -55,7 +55,7 @@
 					</li>
 				</ul>
 				<ul v-if="currentType=='out_components'" class="mui-table-view mui-table-view-chevron">
-					<li v-for="goods in goodsList" class="mui-table-view-cell mui-media" style="padding-right: 30px;">
+					<li  v-tap="goods.selected=!goods.selected;" v-for="goods in goodsList" class="mui-table-view-cell mui-media" style="padding-right: 30px;">
 						<a href="javascript:;">
 							<img style="width: 60px;max-width: 60px;height: 60px;" class="mui-media-object mui-pull-left" v-bind:src="goods.avatar">
 							<div class="mui-media-body">
@@ -65,13 +65,16 @@
 								</p>
 								<p class='mui-ellipsis'>
 									<span style="display: inline-block;width: 80%;">配件编号:{{goods.code}}</span>
-									<input style="display: inline-block;width: 20%" name="radio1" checked="{{goods.selected}}" type="checkbox">
+									<input style="display: inline-block;width: 20%" name="radio1" v-bind:checked="goods.selected" type="checkbox">
 								</p>
 								<p class='mui-ellipsis'>
 									{{goods.sn}}
-									<button v-tap="goods.sum>0?goods.sum--:''" type="button" class="check-btn mui-btn" v-bind:class="{'unchoosed':goods.sum==0,'choosed':goods.sum>0}">-</button>
-									<span>{{goods.sum}}</span>
-									<button v-tap="goods.sum<goods.count?goods.sum++:''" type="button" class="check-btn mui-btn" v-bind:class="{'unchoosed':goods.sum==0,'choosed':goods.sum>0}">+</button>
+									<span v-if="goods.count>1">
+										<button v-tap="goods.sum>0?goods.sum--:''" type="button" class="check-btn mui-btn" v-bind:class="{'unchoosed':goods.sum==0,'choosed':goods.sum>0}">-</button>
+										<span>{{goods.sum}}</span>
+										<button v-tap="goods.sum<goods.count?goods.sum++:''" type="button" class="check-btn mui-btn" v-bind:class="{'unchoosed':goods.sum==0,'choosed':goods.sum>0}">+</button>
+									</span>
+									
 								</p>
 							</div>
 						</a>
@@ -79,7 +82,7 @@
 				</ul>
 				<!--数据列表-->
 				<ul v-if="currentType=='my_out_components'" class="mui-table-view mui-table-view-chevron">
-					<li v-for="goods in goodsList" class="mui-table-view-cell mui-media" style="padding-right: 30px;">
+					<li v-tap="goods.selected=!goods.selected" v-for="goods in goodsList" class="mui-table-view-cell mui-media" style="padding-right: 30px;">
 						<a href="javascript:;">
 							<img style="width: 60px;max-width: 60px;height: 60px;" class="mui-media-object mui-pull-left" v-bind:src="goods.avatar">
 							<div class="mui-media-body">
@@ -88,14 +91,12 @@
 									<span style="display: inline-block;width: 35%;">数量:{{goods.count}}</span>
 								</p>
 								<p class='mui-ellipsis'>
-									<span style="display: inline-block;width: 80%;">配件编号:{{goods.goodsID}}</span>
-									<input style="display: inline-block;width: 20%" name="radio1" checked="{{goods.selected}}" type="checkbox">
+									<span style="display: inline-block;width: 80%;">配件编号:{{goods.code}}</span>
+									<input v-if="goods.count==1" style="display: inline-block;width: 20%" name="radio1" checked="{{goods.selected}}" type="checkbox">
 								</p>
 								<p class='mui-ellipsis'>
 									{{goods.sn}}
-									<button v-tap="goods.sum>0?goods.sum--:''" type="button" class="check-btn mui-btn" v-bind:class="{'unchoosed':goods.sum==0,'choosed':goods.sum>0}">-</button>
-									<span>{{goods.sum}}</span>
-									<button v-tap="goods.sum<goods.count?goods.sum++:''" type="button" class="check-btn mui-btn" v-bind:class="{'unchoosed':goods.sum==0,'choosed':goods.sum>0}">+</button>
+								
 								</p>
 							</div>
 						</a>
@@ -183,9 +184,6 @@
 	<script type="text/javascript">
 		keyword = '';
 		page = 1;
-		mui.plusReady(function() {
-			//			pullComponetList();
-		})
 
 		function initDataFunc(data) {
 			var component = {}
@@ -224,14 +222,20 @@
 					for(var key in this.goodsList) {
 						goods = this.goodsList[key];
 						console.log(JSON.stringify(goods));
-						if(goods['sum'] > 0 && goods['selected'] == true) {
-							choosedGoods.push(goods);
+						if(goods['selected']) {
+							if(goods['sum'] > 0){
+								choosedGoods.push(goods);
+							}else if(!goods['sum']>0&&goods['sn']!=''){
+								goods['sum'] = 1;
+								choosedGoods.push(goods);
+							}
+							
 						}
 					}
 					if(choosedGoods.length == 0) {
 						alert('请选择配件');
 					} else {
-						redirect('staff_search.html')
+						redirect('staff_search.html?components='+JSON.stringify(choosedGoods));
 					}
 				}
 			},
@@ -259,7 +263,12 @@
 				}
 			},
 		})
-
+		mui.plusReady(function() {
+			vm.currentType = plus.webview.currentWebview().parent().type
+			page = 1;
+			pullComponetList();
+			vm.goodsList = [];
+		})
 		mui.init({
 			pullRefresh: {
 				container: "#refreshContainer", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
@@ -280,7 +289,7 @@
 			page = 1;
 			vm.currentType = e.detail.type;
 			if(vm.currentType != 'out_components') {
-				if(e.detail['is_refresh']===undefined||e.detail['us_refresh']==true ) {
+				if(e.detail['is_refresh'] === undefined || e.detail['us_refresh'] == true) {
 					pullComponetList();
 					vm.goodsList = [];
 				}
