@@ -18,3 +18,7 @@ GOODS_IN_API = HOST_API+'e/parts/parts_in'
 GOODS_MINE_API = HOST_API+'e/parts/my_parts'
 
 CHECK_LIST_API = HOST_API+'line/plan_list'
+
+LOGIN_API = HOST_API+'e/login'
+
+ORDER_WAIT_LIST_API = HOST_ORDER+'waiting_list'

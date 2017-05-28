@@ -1,8 +1,9 @@
 mui.plusReady(function() {
+
 	self = plus.webview.currentWebview()
 	self.addEventListener('show', function() {
 		var current = self.id;
-		if(['index_recive.html', 'index_order.html', 'index_check.html', 'index_message.html', 'index_ucenter.html'].indexOf(current) >= 0) {
+		if(['index_recive_list.html', 'index_order_list.html', 'index_check_list.html', 'index_message_sub.html', 'index_ucenter.html'].indexOf(current) >= 0) {
 			var main = plus.webview.getLaunchWebview();
 			console.log('show ' + current.id);
 			mui.fire(main, 'init_header', {
@@ -23,7 +24,7 @@ mui('body').on('tap', 'a,li,div', function(e) {
 		var page = plus.webview.getWebviewById(targetTab);
 		if(!page) {
 			console.log('open new page ' + targetTab);
-			console.log('params:'+JSON.stringify(params));
+			console.log('params:' + JSON.stringify(params));
 			mui.openWindow({
 				url: targetTab,
 				id: targetTab,
@@ -33,6 +34,9 @@ mui('body').on('tap', 'a,li,div', function(e) {
 				extras: params
 			});
 		} else {
+			mui.fire(page, 'init_with_params', {
+						'params': params
+					});
 			console.log('page ' + targetTab + ' is loaded');
 			page.show("slide-in-right", 300);
 		}
@@ -57,19 +61,22 @@ function redirect(pageFullUrl) {
 		});
 	} else {
 		console.log('page ' + pageUrl + ' is loaded');
+		mui.fire(page, 'init_with_params', {
+						'params': params
+					});
 		page.show("slide-in-right", 300);
 	}
 }
 bank = {
 	"post": function(url, data, callback) {
-		console.log(url); 
-		token = localStorage.getItem('token')?localStorage.get('token'):'402848eb5bf02279015bf0369a73001';
-		console.log('token='+token);
+		console.log(url);
+		token = localStorage.getItem('token') ? localStorage.get('token') : '402848eb5bf02279015bf0369a73001';
+		console.log('token=' + token);
 		data['token'] = token;
-		if(!data['uid']){
+		if(!data['uid']) {
 			data['uid'] = localStorage.getItem('uid');
 		}
-		if(!data['sid']){
+		if(!data['sid']) {
 			data['sid'] = '1232eds';
 		}
 		mui.ajax({
@@ -78,7 +85,7 @@ bank = {
 			data: data,
 			dataType: 'json',
 			success: function(res) {
-				console.log('current page = '+self.id+' response='+JSON.stringify(res));
+				console.log('current page = ' + self.id + ' response=' + JSON.stringify(res));
 				if(res.code == 200) {
 					if(callback) {
 						callback(res.data);
@@ -93,24 +100,24 @@ bank = {
 		})
 	},
 	"get": function(url, params, callback) {
-		console.log(url); 
-		token = localStorage.getItem('token')?localStorage.get('token'):'1';
-		
+		console.log(url);
+		token = localStorage.getItem('token') ? localStorage.getItem('token') : '402848eb5bf02279015bf0369a73001';
+
 		params['token'] = token;
-		if(!params['account']){
-			params['account'] = localStorage.getItem('account');
+		if(!params['account']) {
+			params['account'] = localStorage.getItem('account') ? localStorage.getItem('account') : "402848eb5bf02279015bf0369a730017";
 		}
-		if(!params['sid']){
+		if(!params['sid']) {
 			params['sid'] = '1232eds';
 		}
-		console.log('current page = '+self.id+' getParams='+JSON.stringify(params));
+		console.log('current page = ' + self.id + ' getParams=' + JSON.stringify(params));
 		mui.ajax({
 			url: url,
 			type: 'GET',
 			data: params,
 			dataType: 'json',
 			success: function(res) {
-				console.log('current page = '+self.id+' data='+JSON.stringify(res));
+				console.log('current page = ' + self.id + ' data=' + JSON.stringify(res));
 				if(res.code == 'A00001') {
 					if(callback) {
 						callback(res.data);
@@ -120,8 +127,17 @@ bank = {
 				}
 			},
 			error: function() {
+				
 				mui.toast('网络错误');
+			},
+			complete:function(){
+//				if(mui('#refreshContainer')!=undefined) {
+//					console.log(mui('#refreshContainer'));
+//					mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+//					mui('#refreshContainer').pullRefresh().endPullupToRefresh();
+//				}
 			}
+			
 		})
 	}
 }

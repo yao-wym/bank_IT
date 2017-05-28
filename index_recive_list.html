@@ -7,53 +7,86 @@
 		<title>接单</title>
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link href="css/common.css" rel="stylesheet" />
+		<style type="text/css">
+			.tips-label {
+				background-color: #ff666a;
+				border-radius: 50%;
+				color: white;
+				padding: 0px 4px;
+				margin-left: 1px;
+				font-size: 12px;
+			}
+		</style>
 	</head>
 
-	<body>
-		<!--下拉刷新容器-->
-		<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
-			<div class="mui-scroll">
-				<!--数据列表-->
-				<ul id="recive-list" class="mui-table-view mui-table-view-chevron" style="background-color: inherit;">
-					<li style="margin-top: 10px;background-color: white;" v-for="order in orderList[orderType]" track-by="$index" class="mui-table-view-cell">
-						<a v-tap="showDetail(order)" style="overflow: hidden;">
-							<p style="font-weight: bold;color: #333333">流水号：{{order.orderId}}<span style="float: right;margin-left: 20px;">{{order.status}}</span></p>
-							<p style="font-weight: 500;">下单日期：{{order.time}}</p>
-							<p class="list-col-2">
-								<span>机具编号：{{order.machineOrder}}</span>
-								<span>机具型号：{{order.machineType}}</span>
-							</p>
-							<p class="list-col-2">
-								<span>装机地址：{{order.machineAddr}}</span>
-								<span>序列号：{{order.machineId}}</span>
-							</p>
-						</a>
-					</li>
-				</ul>
+	<body v-cloak  id="app">
+		<header id="recive-header" class="mui-bar mui-bar-nav" style="position: fixed;top:0px;background-color: white;color: #CCCCCC;">
+			<div id="reciveTap" class="mui-segmented-control mui-segmented-control-inverted">
+				<a v-tap="reciveType=1" class="mui-control-item mui-active">自动派单<span class="tips-label">{{autoOrder}}</span></a>
+				<a v-tap="reciveType=2" class="mui-control-item">计划派单<span class="tips-label">{{groupOrder}}</span></a>
 			</div>
+		</header>
+		<div id="" style="margin-top:20px">
+			<div>
+				更新
+			</div>
+			<!--数据列表-->
+			<ul id="recive-list" class="bank-list" style="padding: 0;">
+				<li style="margin-top: 10px;padding: ;background-color: white;" v-for="order in reciveList[reciveType]" track-by="$index" class="mui-table-view-cell">
+					<a v-tap="showDetail(order)" style="overflow: hidden;padding: 0;">
+						<p style="border-bottom:1px solid #e8edf8;padding: 10px 15px;">
+							<label>流水号：</label>：{{order.orderId}}
+							<span class="state-label">{{order.status}}</span>
+						</p>
+						<div style="padding: 0 15px;">
+							<p><label>下单日期：</label>{{order.time}}</p>
+							<p class="list-col-2">
+								<span><label>机具编号：</label>{{order.machineOrder}}</span>
+								<span><label>机具型号：</label>{{order.machineType}}</span>
+							</p>
+							<p class="list-col-2">
+								<span><label>装机地址：</label>{{order.machineAddr}}</span>
+								<span><label>序列号：</label>{{order.machineId}}</span>
+							</p>
+						</div>
+
+					</a>
+				</li>
+			</ul>
+
 		</div>
 	</body>
 
 	<script src="js/mui.js"></script>
 	<script src="js/vue.js"></script>
+	<script src="js/api.js"></script>
 	<script src="js/vue-tap.js"></script>
 	<script src="js/common.js"></script>
 	<script type="text/javascript">
 		var vm = new Vue({
-			el: '#refreshContainer',
-			methods: { 
-				showDetail:function(order) {
-					if(this.orderType == 1) {
+			el: '#app',
+			methods: {
+				showDetail: function(order) {
+					if(this.reciveType == 1) {
 						redirect('pages/order_detail_wait.html');
-					} else if(this.orderType == 2) {
+					} else if(this.reciveType == 2) {
 						redirect('pages/order_detail_group.html');
 					}
 				},
 			},
+			watch: {
+				orderType: function(newVal, oldVal) {
+					if(!reciveList[newVal]) {
+						pullGoodsList();
+					}
+				}
+			},
 			data: {
-				orderType: 1,
+				autoOrder: 1,
+				groupOrder: 12,
+				reciveType: 1,
 				title: '接单',
-				orderList: {
+				reciveList: {
 					"1": [{
 						status: '维修中',
 						orderId: '132',
@@ -72,49 +105,50 @@
 						machineType: 1,
 						machineId: 1,
 						time: "2017-02-03 20:22:22"
-					}, ], 
-					"2": [{
-						status: '维修中2',
-						orderId: '132',
-						machineSn: '123eqw',
-						machineAddr: 1,
-						machineOrder: 1,
-						machineType: 1,
-						machineId: 1,
-						time: "2017-02-03 20:22:22"
-					}, {
-						status: '已出发22',
-						orderId: '132',
-						machineSn: '123eqw',
-						machineAddr: 1,
-						machineOrder: 1,
-						machineType: 1,
-						machineId: 1,
-						time: "2017-02-03 20:22:22"
-					}, ]
+					}, ],
+					"2": {}
 				},
 			},
 
 		})
 
-		mui.init({
-			pullRefresh: {
-				container: "#refreshContainer", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-				down: {
-					height: 50, //可选,默认50.触发下拉刷新拖动距离,
-					auto: true, //可选,默认false.自动下拉刷新一次
-					contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
-					contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
-					contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
-					callback: function() {
-						mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
-					} //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-				}
-			}
+		var page = {};
+
+		function pullOrderList() {
+			bank.get(ORDER_WAIT_LIST_API, {
+				page: page[vm.reciveType],
+				size: 20,
+				type: vm.reciveType
+			}, function(e) {
+				vm.reciveList[vm.reciveType] = e.list
+			})
+		}
+		//		mui.init({
+		//			pullRefresh: {
+		//				container: "#refreshContainer", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+		//				down: {
+		////					height: 50, //可选,默认50.触发下拉刷新拖动距离,
+		////					auto: true, //可选,默认false.自动下拉刷新一次
+		//					contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+		//					contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+		//					contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+		//					callback: function() {
+		//						mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+		//					} //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+		//				}
+		//			}
+		//		})
+		mui.plusReady(function() {
+			page[vm.reciveType] = 1;
+			//			pullOrderList();
 		})
 		window.addEventListener("change_type", function(e) {
 			console.log(JSON.stringify(e.detail.type));
-			vm.orderType = e.detail.type;
+			vm.reciveType = e.detail.type;
+			if(!vm.reciveList[vm.reciveType]) {
+				page[vm.reciveType] = 1;
+				//				pullOrderList();
+			}
 		});
 	</script>
 

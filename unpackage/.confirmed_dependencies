@@ -23,7 +23,10 @@
 			"pages/my_used_goods.html",
 			"pages/goods_search.html",
 			"pages/all_goods.html",
-			"pages/my_comments.html"
+			"pages/my_comments.html",
+			"pages/my_all_goods.html",
+			"pages/login.html",
+			"pages/my_recived_goods.html"
 		]
 	},
 	"index.html": {
@@ -33,7 +36,10 @@
 			"js/mui.min.js",
 			"fonts/mui.ttf",
 			"css/mui.min.css",
-			"index_recive.html"
+			"index_recive.html",
+			"index_recive_list.html",
+			"js/vue-tap.js",
+			"img/loading.gif"
 		],
 		"refer": [
 			"index_order.html",
@@ -42,7 +48,15 @@
 			"index_check.html",
 			"index_message.html",
 			"index_recive.html",
-			"pages/create_work_order.html"
+			"pages/create_work_order.html",
+			"index_check_list.html",
+			"index_recive_list.html",
+			"index_message_sub.html",
+			"index_order_list.html",
+			"pages/login.html",
+			"pages/order_detail_wait.html",
+			"pages/route_detail.html",
+			"pages/components_search.html"
 		]
 	},
 	"index_check.html": {
@@ -131,7 +145,8 @@
 			"js/api.js"
 		],
 		"refer": [
-			"pages/order_detail_repair.html"
+			"pages/order_detail_repair.html",
+			"pages/order_detail_out.html"
 		]
 	},
 	"index_recive_list.html": {
@@ -141,7 +156,9 @@
 			"css/common.css",
 			"css/mui.min.css",
 			"js/mui.js",
-			"js/vue-tap.js"
+			"js/vue-tap.js",
+			"img/loading.gif",
+			"js/api.js"
 		],
 		"refer": [
 			"pages/order_detail_wait.html"
@@ -149,12 +166,28 @@
 	},
 	"pages/order_detail_wait.html": {
 		"resources": [
-			"fonts/mui.ttf"
+			"fonts/mui.ttf",
+			"js/common.js",
+			"js/vue.js",
+			"js/mui.min.js",
+			"css/common.css",
+			"css/mui.min.css",
+			"js/vue-tap.js"
 		]
 	},
 	"index_check_list.html": {
 		"refer": [
-			"pages/login.html"
+			"pages/login.html",
+			"pages/route_detail.html"
+		],
+		"resources": [
+			"css/common.css",
+			"js/mui.js",
+			"js/api.js",
+			"js/common.js",
+			"js/vue.js",
+			"css/mui.min.css",
+			"js/vue-tap.js"
 		]
 	},
 	"pages/login.html": {
@@ -249,7 +282,8 @@
 	"pages/my_used_goods_sub.html": {
 		"resources": [
 			"js/mui.js",
-			"img/beijian.png"
+			"img/beijian.png",
+			"js/api.js"
 		]
 	},
 	"pages/all_goods.html": {
@@ -261,10 +295,12 @@
 			"fonts/mui.ttf",
 			"css/mui.min.css",
 			"js/vue-tap.js",
-			"pages/staff_search_sub.html"
+			"pages/staff_search_sub.html",
+			"pages/all_goods_sub.html"
 		],
 		"refer": [
-			"pages/staff_search_sub.html"
+			"pages/staff_search_sub.html",
+			"pages/all_goods_sub.html"
 		]
 	},
 	"pages/my_comments.html": {
@@ -319,6 +355,116 @@
 			"fonts/mui.ttf",
 			"js/mui.js",
 			"js/vue-tap.js"
+		]
+	},
+	"pages/route_detail.html": {
+		"resources": [
+			"js/common.js",
+			"js/vue.js",
+			"js/mui.min.js",
+			"css/common.css",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/vue-tap.js"
+		]
+	},
+	"pages/order_detail_out.html": {
+		"resources": [
+			"js/common.js",
+			"js/vue.js",
+			"js/mui.min.js",
+			"css/common.css",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/vue-tap.js"
+		]
+	},
+	"pages/my_all_goods_sub.html": {
+		"resources": [
+			"js/mui.js"
+		]
+	},
+	"pages/my_all_goods.html": {
+		"resources": [
+			"pages/my_all_goods_sub.html",
+			"js/common.js",
+			"js/vue.js",
+			"css/common.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/api.js",
+			"js/vue-tap.js"
+		],
+		"refer": [
+			"pages/my_all_goods_sub.html"
+		]
+	},
+	"pages/all_goods_sub.html": {
+		"resources": [
+			"img/blue_location.png",
+			"js/mui.js",
+			"js/api.js"
+		]
+	},
+	"pages/my_recived_goods_sub.html": {
+		"resources": [
+			"img/beijian.png",
+			"js/mui.js",
+			"js/api.js"
+		]
+	},
+	"pages/my_recived_goods.html": {
+		"resources": [
+			"pages/my_recived_goods_sub.html",
+			"fonts/mui.ttf",
+			"js/common.js",
+			"js/vue.js",
+			"css/common.css",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"js/vue-tap.js"
+		],
+		"refer": [
+			"pages/my_recived_goods_sub.html"
+		]
+	},
+	"pages/components_search.html": {
+		"resources": [
+			"pages/my_all_goods_sub.html",
+			"js/common.js",
+			"js/vue.js",
+			"css/common.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/api.js",
+			"js/vue-tap.js",
+			"pages/components_search_sub.html"
+		],
+		"refer": [
+			"pages/my_all_goods_sub.html",
+			"pages/components_search_sub.html"
+		]
+	},
+	"pages/components_search_sub.html": {
+		"resources": [
+			"js/mui.js",
+			"js/common.js",
+			"js/vue.js",
+			"css/common.css",
+			"css/mui.min.css",
+			"js/api.js",
+			"js/vue-tap.js",
+			"img/loading.gif"
+		],
+		"refer": [
+			"pages/machine_tips.html"
+		]
+	},
+	"pages/machine_tips.html": {
+		"resources": [
+			"fonts/mui.ttf"
 		]
 	}
 }

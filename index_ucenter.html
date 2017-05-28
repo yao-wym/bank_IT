@@ -54,13 +54,13 @@
 	</head>
 
 	<body style="background-color: #f5f8ff;" id="app">
-		<div class="mui-content" style="background-color: #f5f8ff;padding: 0 5px">
+		<div class="mui-content" style="background-color: #f5f8ff;padding: 0 0px">
 			<div style="background-color: white;position: relative;">
 				<div style="height: 150px;background-color: #567ffb;text-align: center;">
 					<img v-bind:src="icon" border=0 style="margin-top: 40px;border-radius: 50%;background-color: white;" />
 					<p style="color: white;">{{username}}</p>
 				</div>
-				<div class="mui-btn bg" style="color: white;background-color:#feb53b;border: none;border-radius: 10px;width: 90%;margin:5px 0 5px 5%;">
+				<div class="mui-btn bg" v-bind:style="{backgroundColor:workStatus=='上班'?'#FFC03C':'#FF676B'}" style="color: white;border: none;border-radius: 10px;width: 90%;margin:5px 0 5px 5%;">
 					<div v-tap="changeWorkStatus" style="margin-right: 10px;">
 						<img src="img/shangban.png" width="18px" style="margin-right: 5px;position: relative;top:3px" />
 						<span>{{workStatus}}</span>
@@ -76,25 +76,25 @@
 					</a>
 				</li>
 				<li class="mui-table-view-cell" style="margin-top: 10px;">
-					<a style="overflow: hidden;" class="mui-navigate-right" link="pages/my_all_goods.html">
+					<a style="overflow: hidden;" class="mui-navigate-right" link="pages/components_search.html?type=my_components">
 						<img src="img/kufang.png" />
 						<span>我的库房</span>
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a style="overflow: hidden;" class="mui-navigate-right" link="pages/my_used_goods.html">
+					<a style="overflow: hidden;" class="mui-navigate-right" link="pages/components_search.html?type=my_out_components">
 						<img class="" src="img/daichuku.png" />
 						<span>我的待出库</span>
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a style="overflow: hidden;" class="mui-navigate-right" link="pages/my_recived_goods.html">
+					<a style="overflow: hidden;" class="mui-navigate-right" link="pages/components_search.html?type=my_in_components">
 						<img class="" src="img/dairuku.png" />
 						<span>我的待入库</span>
 					</a>
 				</li>
 				<li class="mui-table-view-cell" style="margin-top: 10px;">
-					<a style="overflow: hidden;" class="mui-navigate-right" link="pages/all_goods.html">
+					<a style="overflow: hidden;" class="mui-navigate-right" link="pages/components_search.html?type=all_components">
 						<img class="" src="img/kufangchaxun.png" />
 						<span>库存全局查询</span>
 					</a>
@@ -106,7 +106,7 @@
 					</a>
 				</li>
 				<li class="mui-table-view-cell" style="margin: 10px 10px;">
-					<a style="overflow: hidden;text-align: center" link="pages/login.html">
+					<a style="overflow: hidden;text-align: center" v-tap="loginOut">
 						<span style="color: #C0C0C0;">退出账号</span>
 					</a>
 				</li>
@@ -118,6 +118,10 @@
 				methods:{
 					changeWorkStatus:function(){
 						this.workStatus=this.workStatus=='下班'?'上班':'下班';
+					},
+					loginOut:function(){ 
+						localStorage.setItem('token','');
+						redirect('pages/login.html');
 					}
 				},
 				el: '#app',

@@ -14,12 +14,27 @@
 	</head>
 
 	<body id="app">
-		<header class="mui-bar mui-bar-nav" style="background-color: white;color: #CCCCCC;">
-			<div id="orderTab" class="mui-segmented-control mui-segmented-control-inverted">
-				<a v-tap="orderType=1" class="mui-control-item mui-active">自动派单({{autoOrder}})</a>
-				<a v-tap="orderType=2" class="mui-control-item">定向群组派单({{groupOrder}})</a>
-			</div>
-		</header>
+		<div id="sub-header" style="margin-top: 50px;">
+			<header v-if="title=='接单'" class="mui-bar mui-bar-nav" style="background-color: white;color: #CCCCCC;">
+				<div id="reciveTap" class="mui-segmented-control mui-segmented-control-inverted">
+					<a v-tap="reciveType=1" class="mui-control-item mui-active">自动派单({{autoOrder}})</a>
+					<a v-tap="reciveType=2" class="mui-control-item">定向群组派单({{groupOrder}})</a>
+				</div>
+			</header>
+			<header v-if="title=='巡检'" class="mui-bar mui-bar-nav" style="background-color: white;color: #CCCCCC;">
+				<div id="checkTab" class="mui-segmented-control mui-segmented-control-inverted">
+					<a v-tap="checkType=1" class="mui-control-item mui-active">未完成</a>
+					<a v-tap="checkType=2" class="mui-control-item">已完成</a>
+				</div>
+			</header>
+			<header v-if="title=='订单列表'" class="mui-bar mui-bar-nav" style="background-color: white;color: #CCCCCC;">
+				<div id="orderTab" class="mui-segmented-control mui-segmented-control-inverted">
+					<a v-tap="orderType=1" class="mui-control-item mui-active">进行中</a>
+					<a v-tap="orderType=3" class="mui-control-item">维修完成</a>
+					<a v-tap="orderType=4" class="mui-control-item">维修失败</a>
+				</div>
+			</header>
+		</div>
 	</body>
 	<script>
 		/*----------------  	Part 1   	变量声明  		----------------TODO */

@@ -226,7 +226,10 @@
 					"pages/my_used_goods.html",
 					"pages/goods_search.html",
 					"pages/all_goods.html",
-					"pages/my_comments.html"
+					"pages/my_comments.html",
+					"pages/my_all_goods.html",
+					"pages/login.html",
+					"pages/my_recived_goods.html"
 				],
 				"priority": 0
 			},
@@ -237,7 +240,10 @@
 					"js/mui.min.js",
 					"fonts/mui.ttf",
 					"css/mui.min.css",
-					"index_recive.html"
+					"index_recive.html",
+					"index_recive_list.html",
+					"js/vue-tap.js",
+					"img/loading.gif"
 				],
 				"refer": [
 					"index_order.html",
@@ -245,7 +251,14 @@
 					"pages/my_info.html",
 					"index_check.html",
 					"index_message.html",
-					"pages/create_work_order.html"
+					"pages/create_work_order.html",
+					"index_check_list.html",
+					"index_message_sub.html",
+					"index_order_list.html",
+					"pages/login.html",
+					"pages/order_detail_wait.html",
+					"pages/route_detail.html",
+					"pages/components_search.html"
 				],
 				"priority": 0
 			},
@@ -335,7 +348,8 @@
 					"js/api.js"
 				],
 				"refer": [
-					"pages/order_detail_repair.html"
+					"pages/order_detail_repair.html",
+					"pages/order_detail_out.html"
 				],
 				"priority": 0
 			},
@@ -346,7 +360,9 @@
 					"css/common.css",
 					"css/mui.min.css",
 					"js/mui.js",
-					"js/vue-tap.js"
+					"js/vue-tap.js",
+					"img/loading.gif",
+					"js/api.js"
 				],
 				"refer": [
 					"pages/order_detail_wait.html"
@@ -355,15 +371,30 @@
 			},
 			"pages/order_detail_wait.html": {
 				"resources": [
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"js/common.js",
+					"js/vue.js",
+					"js/mui.min.js",
+					"css/common.css",
+					"css/mui.min.css",
+					"js/vue-tap.js"
 				],
 				"refer": [],
 				"priority": 0
 			},
 			"index_check_list.html": {
-				"resources": [],
+				"resources": [
+					"css/common.css",
+					"js/mui.js",
+					"js/api.js",
+					"js/common.js",
+					"js/vue.js",
+					"css/mui.min.css",
+					"js/vue-tap.js"
+				],
 				"refer": [
-					"pages/login.html"
+					"pages/login.html",
+					"pages/route_detail.html"
 				],
 				"priority": 0
 			},
@@ -463,7 +494,8 @@
 			"pages/my_used_goods_sub.html": {
 				"resources": [
 					"js/mui.js",
-					"img/beijian.png"
+					"img/beijian.png",
+					"js/api.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -477,7 +509,8 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css",
 					"js/vue-tap.js",
-					"pages/staff_search_sub.html"
+					"pages/staff_search_sub.html",
+					"pages/all_goods_sub.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -539,6 +572,125 @@
 				],
 				"refer": [],
 				"priority": 0
+			},
+			"pages/route_detail.html": {
+				"resources": [
+					"js/common.js",
+					"js/vue.js",
+					"js/mui.min.js",
+					"css/common.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/vue-tap.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/order_detail_out.html": {
+				"resources": [
+					"js/common.js",
+					"js/vue.js",
+					"js/mui.min.js",
+					"css/common.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/vue-tap.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/my_all_goods_sub.html": {
+				"resources": [
+					"js/mui.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/my_all_goods.html": {
+				"resources": [
+					"pages/my_all_goods_sub.html",
+					"js/common.js",
+					"js/vue.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/api.js",
+					"js/vue-tap.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/all_goods_sub.html": {
+				"resources": [
+					"img/blue_location.png",
+					"js/mui.js",
+					"js/api.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/my_recived_goods_sub.html": {
+				"resources": [
+					"img/beijian.png",
+					"js/mui.js",
+					"js/api.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/my_recived_goods.html": {
+				"resources": [
+					"pages/my_recived_goods_sub.html",
+					"fonts/mui.ttf",
+					"js/common.js",
+					"js/vue.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/vue-tap.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/components_search.html": {
+				"resources": [
+					"pages/my_all_goods_sub.html",
+					"js/common.js",
+					"js/vue.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/api.js",
+					"js/vue-tap.js",
+					"pages/components_search_sub.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/components_search_sub.html": {
+				"resources": [
+					"js/mui.js",
+					"js/common.js",
+					"js/vue.js",
+					"css/common.css",
+					"css/mui.min.css",
+					"js/api.js",
+					"js/vue-tap.js",
+					"img/loading.gif"
+				],
+				"refer": [
+					"pages/machine_tips.html"
+				],
+				"priority": 0
+			},
+			"pages/machine_tips.html": {
+				"resources": [
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
 			}
 		},
 		"idle": {
@@ -547,7 +699,6 @@
 				"pages/reset_password.html",
 				"img/接单-1@2x.png",
 				"img/-纸条@2x.png",
-				"pages/machine_tips.html",
 				"img/派单信息@3x.png",
 				"img/进度详情@2x.png",
 				"pages/barcode.html",
@@ -572,7 +723,6 @@
 				"pages/order_detail_group.html",
 				"pages/barcode_scan2.html",
 				"js/immersed.js",
-				"pages/order_detail_out.html",
 				"pages/order_progress_detail.html",
 				"pages/goods_edit_sub.html",
 				"img/-电话@2x.png",
@@ -583,7 +733,6 @@
 				"img/我的订单-2@2x.png",
 				"img/我的订单-1@2x.png",
 				"img/留言@2x.png",
-				"pages/my_recived_goods_sub.html",
 				"img/-纸条@3x.png",
 				"img/备件使用@2x.png",
 				"img/4@2x.png",
@@ -594,7 +743,6 @@
 				"img/2@2x.png",
 				"img/-电话@3x.png",
 				"pages/staff_detail.html",
-				"pages/all_goods_sub.html",
 				"img/派单信息@2x.png",
 				"img/3@2x.png",
 				"img/箭头@2x.png",
@@ -606,7 +754,6 @@
 				"img/返回-白色@3x.png",
 				"img/接单-1@3x.png",
 				"img/我的-1@2x.png",
-				"pages/my_recived_goods.html",
 				"img/1@2x.png",
 				"me/my_info.html",
 				"img/-蓝色@2x.png",
