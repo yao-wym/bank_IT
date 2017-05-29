@@ -53,7 +53,13 @@
 	<script type="text/javascript">
 		keyword = 1;
 		page = 1;
-		size = 10
+		size = 10;
+		var statusMap = {
+			"0":"已出发",
+			"1":"维修中",
+			"2":"维修完成",
+			"3":"维修失败",
+		}
 		var vm = new Vue({
 			el: '#app',
 			data: {

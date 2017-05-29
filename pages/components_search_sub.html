@@ -65,7 +65,7 @@
 								</p>
 								<p class='mui-ellipsis'>
 									<span style="display: inline-block;width: 80%;">配件编号:{{goods.code}}</span>
-									<input style="display: inline-block;width: 20%" name="radio1" v-bind:checked="goods.selected" type="checkbox">
+									<input style="display: inline-block;width: 20%" name="radio1" v-bind:checked="goods.selected" type="radio">
 								</p>
 								<p class='mui-ellipsis'>
 									{{goods.sn}}
@@ -104,9 +104,9 @@
 				</ul>
 
 				<ul v-if="currentType=='my_in_components'" class="mui-table-view mui-table-view-chevron">
-					<li link="machine_tips.html" v-for="goods in goodsList" class="mui-table-view-cell mui-media" style="padding-right: 30px;">
-						<a link="machine_tips.html">
-							<img style="width: 60px;max-width: 60px;height: 60px;" class="mui-media-object mui-pull-left" v-bind:src="goods.avatar">
+					<li v-for="goods in goodsList" class="mui-table-view-cell mui-media" style="padding-right: 30px;">
+						<a>
+							<img link="machine_tips.html" style="width: 60px;max-width: 60px;height: 60px;" class="mui-media-object mui-pull-left" v-bind:src="goods.avatar">
 							<div class="mui-media-body">
 								<p>
 									<span style="display: inline-block;width: 70%;">{{goods.partsName}}-{{goods.type}}{{goods.partsStatus}}</span>
@@ -130,7 +130,7 @@
 										</p>
 									</div>
 									<div style="display: inline-block;width: 30%;position: relative;top:-10px;">
-										<button type="button" class="mui-btn-primary" style="padding:1px 5px;font-size: 12px;">取消</button>
+										<button v-tap="reciveComponents(goods)" type="button" class="mui-btn-primary" style="padding:1px 5px;font-size: 12px;">接受</button>
 									</div>
 								</p>
 							</div>
@@ -217,25 +217,46 @@
 		var vm = new Vue({
 			el: '#app',
 			methods: {
+				reciveComponents:function(components){
+					bank.post(COMPONENT_RECIVE_SURE_API,
+						{
+							partsId:components.id,
+							partsInOutId:components.partsInOutId,
+							storeInoutId:component.storeInOutId
+						},
+						function(res){
+						
+					})
+					event.stopPropagation()
+				},
 				use_goods: function() {
-					var choosedGoods = [];
+					var choosedGoods = {};
 					for(var key in this.goodsList) {
 						goods = this.goodsList[key];
 						console.log(JSON.stringify(goods));
 						if(goods['selected']) {
 							if(goods['sum'] > 0){
-								choosedGoods.push(goods);
+								choosedGoods = goods;
+								break;
 							}else if(!goods['sum']>0&&goods['sn']!=''){
 								goods['sum'] = 1;
-								choosedGoods.push(goods);
+								choosedGoods = goods;
+								break;
 							}
 							
 						}
 					}
-					if(choosedGoods.length == 0) {
+					if(choosedGoods == {}) {
 						alert('请选择配件');
 					} else {
-						redirect('staff_search.html?components='+JSON.stringify(choosedGoods));
+						bank.post(COMPONENT_POST_API, {
+							"SN":choosedGoods['sn']
+						}, function(res) {
+							if(res == true){
+								redirect('staff_search.html?components='+JSON.stringify(choosedGoods));
+							}
+						})
+						
 					}
 				}
 			},
@@ -266,7 +287,8 @@
 		mui.plusReady(function() {
 			vm.currentType = plus.webview.currentWebview().parent().type
 			page = 1;
-			pullComponetList();
+//			setTimeout("",1000);
+			pullComponetList()
 			vm.goodsList = [];
 		})
 		mui.init({

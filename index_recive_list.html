@@ -33,20 +33,20 @@
 			<!--数据列表-->
 			<ul id="recive-list" class="bank-list" style="padding: 0;">
 				<li style="margin-top: 10px;padding: ;background-color: white;" v-for="order in reciveList[reciveType]" track-by="$index" class="mui-table-view-cell">
-					<a v-tap="showDetail(order)" style="overflow: hidden;padding: 0;">
+					<a link="pages/order_detail.html?orderId={{order.id}}" style="overflow: hidden;padding: 0;">
 						<p style="border-bottom:1px solid #e8edf8;padding: 10px 15px;">
-							<label>流水号：</label>：{{order.orderId}}
-							<span class="state-label">{{order.status}}</span>
+							<label>流水号：</label>{{order.orderNo}}
+							<span class="state-label">{{order.orderStatus}}</span>
 						</p>
 						<div style="padding: 0 15px;">
-							<p><label>下单日期：</label>{{order.time}}</p>
+							<p><label>下单日期：</label>{{order.beginDate}}</p>
 							<p class="list-col-2">
-								<span><label>机具编号：</label>{{order.machineOrder}}</span>
-								<span><label>机具型号：</label>{{order.machineType}}</span>
+								<span><label>机具编号：</label>{{order.code}}</span>
+								<span><label>机具型号：</label>{{order.modelCode}}</span>
 							</p>
 							<p class="list-col-2">
-								<span><label>装机地址：</label>{{order.machineAddr}}</span>
-								<span><label>序列号：</label>{{order.machineId}}</span>
+								<span><label>装机地址：</label>{{order.insSide}}</span>
+								<span><label>序列号：</label>{{order.sn}}</span>
 							</p>
 						</div>
 
@@ -67,11 +67,12 @@
 			el: '#app',
 			methods: {
 				showDetail: function(order) {
-					if(this.reciveType == 1) {
-						redirect('pages/order_detail_wait.html');
-					} else if(this.reciveType == 2) {
-						redirect('pages/order_detail_group.html');
-					}
+//					var pageOrderDetail = plus.webview.getWebviewById('pages/order_detail_wait.html');
+//					if(this.reciveType == 1) {
+//						redirect('pages/order_detail_wait.html');
+//					} else if(this.reciveType == 2) {
+//						redirect('pages/order_detail_group.html');
+//					}
 				},
 			},
 			watch: {
@@ -87,32 +88,17 @@
 				reciveType: 1,
 				title: '接单',
 				reciveList: {
-					"1": [{
-						status: '维修中',
-						orderId: '132',
-						machineSn: '123eqw',
-						machineAddr: 1,
-						machineOrder: 1,
-						machineType: 1,
-						machineId: 1,
-						time: "2017-02-03 20:22:22"
-					}, {
-						status: '已出发',
-						orderId: '132',
-						machineSn: '123eqw',
-						machineAddr: 1,
-						machineOrder: 1,
-						machineType: 1,
-						machineId: 1,
-						time: "2017-02-03 20:22:22"
-					}, ],
-					"2": {}
+					
 				},
 			},
 
 		})
 
 		var page = {};
+		var statusMap = {
+			"0":"待接单",
+			"2":"已接单",
+		}
 
 		function pullOrderList() {
 			bank.get(ORDER_WAIT_LIST_API, {
@@ -120,7 +106,17 @@
 				size: 20,
 				type: vm.reciveType
 			}, function(e) {
-				vm.reciveList[vm.reciveType] = e.list
+				obj = {};
+				for(var key in vm.reciveList){
+					obj[key] = vm.reciveList[key];
+				}
+				for(var i in e.list){
+					var time = new Date(e.list[i]['beginDate']*1);
+					e.list[i]['beginDate'] = parseTimeStamp(e.list[i]['beginDate']);
+					e.list[i]['orderStatus'] = statusMap[e.list[i]['orderStatus']];
+				}
+				obj[vm.reciveType] = e.list;
+				vm.reciveList = obj;
 			})
 		}
 		//		mui.init({
@@ -140,7 +136,7 @@
 		//		})
 		mui.plusReady(function() {
 			page[vm.reciveType] = 1;
-			//			pullOrderList();
+			pullOrderList();
 		})
 		window.addEventListener("change_type", function(e) {
 			console.log(JSON.stringify(e.detail.type));

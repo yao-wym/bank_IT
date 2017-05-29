@@ -25,23 +25,23 @@
 		<ul class="mui-table-view" style="font-size: 13px;color: #999999;">
 			<li class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
 				<div style="float: left;width: 30%;">录入人员代码：</div>
-				<div style="float: right;width: 70%;">刘XX000001</div>
+				<div style="float: right;width: 70%;">{{order.bankUser.name}}</div>
 			</li>
 			<li class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
 				<div style="float: left;width: 30%;">录入人员编号：</div>
-				<div style="float: right;width: 70%;">刘XX000001</div>
+				<div style="float: right;width: 70%;">{{order.bankUser.code}}</div>
 			</li>
 			<li class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
 				<div style="float: left;width: 30%;">联系人：</div>
-				<div style="float: right;width: 70%;"></div>
+				<div style="float: right;width: 70%;">{{order.bankUser.name}}</div>
 			</li>
 			<li class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
 				<div style="float: left;width: 30%;">联系人电话：</div>
-				<div style="float: right;width: 70%;"></div>
+				<div style="float: right;width: 70%;">{{order.bankUser.phone}}</div>
 			</li>
 			<li class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
 				<div style="float: left;width: 30%;">机具编号：</div>
-				<div style="float: right;width: 70%;"></div>
+				<div style="float: right;width: 70%;">{{order.atm.id}}</div>
 			</li>
 			<li link="map_container.html?title=器材地址" class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
 				<div style="float: left;width: 30%;">器材地址：</div>
@@ -51,27 +51,27 @@
 			</li>
 			<li class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
 				<div style="float: left;width: 30%;">机具序列号：</div>
-				<div style="float: right;width: 70%;"></div>
+				<div style="float: right;width: 70%;">{{order.atm.code}}</div>
 			</li>
 			<li class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
 				<div style="float: left;width: 30%;">机具单位：</div>
-				<div style="float: right;width: 70%;"></div>
+				<div style="float: right;width: 70%;">{{order.atm.bankName}}</div>
 			</li>
 			<li class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
 				<div style="float: left;width: 30%;">机具类型：</div>
-				<div style="float: right;width: 70%;"></div>
+				<div style="float: right;width: 70%;">{{order.atm.type}}</div>
 			</li>
 			<li class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
 				<div style="float: left;width: 30%;">机具名称：</div>
-				<div style="float: right;width: 70%;"></div>
+				<div style="float: right;width: 70%;">{{order.atm.name}}</div>
 			</li>
 			<li class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
 				<div style="float: left;width: 30%;">机具型号：</div>
-				<div style="float: right;width: 70%;"></div>
+				<div style="float: right;width: 70%;">{{order.atm.type}}</div>
 			</li>
 			<li class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
 				<div style="float: left;width: 30%;">机具状态：</div>
-				<div style="float: right;width: 70%;"></div>
+				<div style="float: right;width: 70%;">{{order.atm.status}}</div>
 			</li>
 			<li class="mui-table-view-cell" style="position: initial;padding: 3px 15px;">
 				<div style="float: left;width: 30%;">故障类型：</div>
@@ -79,7 +79,7 @@
 			</li>
 			<li class="mui-table-view-cell" style="position: initial;padding: 5px 15px;color: #666666;">
 				<div style="float: left;width: 20%;">预约日期：</div>
-				<div style="float: left;width: 40%;">2016.06.01</div>
+				<div style="float: left;width: 40%;">{{order.order.beginDate}}</div>
 				<div style="float: left;width: 20%;">预约时间：</div>
 				<div style="float: left;width: 20%;">15:30</div>
 			</li>
@@ -102,17 +102,29 @@
 	<script src="../js/vue.js"></script>
 	<script src="../js/vue-tap.js"></script>
 	<script src="../js/common.js"></script>
+	<script src="../js/api.js"></script>
 	<script type="text/javascript">
+		function pullOrderdetail(orderId){
+			bank.get(ORDER_DETAIL_API,{orderId:orderId},function(res){
+				vm.order = res
+			})
+		}
 		var vm = new Vue({
 			methods:{
 				'reciveOrder':function(){
-					redirect('order_detail_out.html?orderId=123');
+					redirect('order_recive_detail.html?orderId='+this.orderId);
 				}
 			},
 			el: '#app',
 			data: {
-				'title': '订单详情页-待接单'
+				order:{},
+				orderId:"",
+				title: '订单详情'
 			}
+		})
+		window.addEventListener("init_with_params",function(e){
+			vm.orderId = e.detail.params.orderId;
+			pullOrderdetail(vm.orderId);
 		})
 	</script>
 

@@ -28,13 +28,13 @@
 		<ul class="mui-table-view" style="font-size: 13px;">
 			<li class="mui-table-view-cell" style="position: initial;padding: 5px 15px;">
 				<div style="float: left;width: 20%;">机具编号</div>
-				<div style="float: left;width: 50%;border: solid;border-width: 1px;padding: 0px 5px;background-color: rgba(204, 204, 204, 1);">111</div>
+				<input v-model="atmId" style="float: left;width: 50%;border: solid;border-width: 1px;padding: 0px 5px;background-color: rgba(204, 204, 204, 1);" />
 				<div style="float: right;width: 30%;padding: 0px 20px;">
 					<button type="button" class="mui-btn mui-btn-outlined" style="font-size: 12px;color:white;padding: 4px 10px;background-color: #5A81FF;">
-		  				<a link="barcode_scan.html" style="color: white;">扫码生成</a></button>
+		  				<a v-link="barcode_scan.html" style="color: white;">扫码生成</a></button>
 				</div>
 			</li>
-			<li class="mui-table-view-cell" style="position: initial;padding: 5px 15px;">
+			<li v-link="map_container.html" class="mui-table-view-cell" style="position: initial;padding: 5px 15px;">
 				<div style="float: left;width: 20%;">装机位置：</div>
 				<div style="float: right;width: 80%;"></div>
 			</li>
@@ -72,15 +72,16 @@
 					<button type="button" class="mui-btn mui-btn-outlined" style="font-size: 12px;border-color: #000000;padding: 2px 5px;background-color: white;">&nbsp;&nbsp;正常&nbsp;&nbsp;</button>
 				</div>
 			</li>
-			<li class="mui-table-view-cell" style="position: initial;padding: 20px 15px;">
-				<div style="float: left;width: 20%;">预约日期：</div>
-				<div style="float: left;width: 40%;">2016.06.01</div>
-				<div style="float: left;width: 20%;">预约时间：</div>
-				<div style="float: left;width: 20%;">15:30</div>
-			</li>
+
 		</ul>
+		<div style="position: initial;padding: 20px 15px;">
+			<div style="float: left;width: 20%;font-size: 14px">预约日期：</div>
+			<input type="datetime" style="margin-right: 10px;padding: 0;float: left;width: 30%;line-height: 30px;height: 30px;">
+			<div style="float: left;width: 20%;font-size: 14px;">预约时间：</div>
+			<input type="time" style="padding: 0;float: left;width: 20%;line-height: 30px;height: 30px;">
+		</div>
 		<div style="height: 150px;"></div>
-		<button type="button" class="mui-btn" style="width: 100%;height: 45px;margin: 0px;border: none;background-color: #5A81FF;color: white;">
+		<button v-tap="createTask()" type="button" class="mui-btn" style="position: fixed;bottom:0;width: 100%;height: 45px;margin: 0px;border: none;background-color: #5A81FF;color: white;">
 			发起
 		</button>
 		<!--<div style="height: 50px;"></div>-->
@@ -111,13 +112,41 @@
 
 	</body>
 	<script src="../js/common.js"></script>
+	<script src="../js/api.js"></script>
 	<script type="text/javascript">
 		var vm = new Vue({
 			el: '#app',
 			data: {
-				'title': '新建工单'
-			}
+				title: '新建工单',
+				atmId: "",
+				unTypes:"",
+				status:"",
+				beginDate:"",
+				note:"",
+				
+			},
+			methods: {
+					createTask: function() {
+						var body ={
+							"atmId": this.atmId,
+							"beginDate": this.beginDate,
+							"status": this.status,
+							"unTypes": [
+								this.unTypes,
+							]
+						}
+						bank.post(TASK_CREATE_API, {
+							body:JSON.stringify(body)
+						},function(res){
+							
+						})
+					}
+				}
 		})
+
+		function scaned(type, result, file) {
+			vm.code = result;
+		}
 	</script>
 
 </html>

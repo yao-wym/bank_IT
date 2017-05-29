@@ -35,8 +35,8 @@ mui('body').on('tap', 'a,li,div', function(e) {
 			});
 		} else {
 			mui.fire(page, 'init_with_params', {
-						'params': params
-					});
+				'params': params
+			});
 			console.log('page ' + targetTab + ' is loaded');
 			page.show("slide-in-right", 300);
 		}
@@ -62,23 +62,28 @@ function redirect(pageFullUrl) {
 	} else {
 		console.log('page ' + pageUrl + ' is loaded');
 		mui.fire(page, 'init_with_params', {
-						'params': params
-					});
+			'params': params
+		});
 		page.show("slide-in-right", 300);
 	}
 }
 bank = {
 	"post": function(url, data, callback) {
-		console.log(url);
-		token = localStorage.getItem('token') ? localStorage.get('token') : '402848eb5bf02279015bf0369a73001';
+		token = localStorage.getItem('token') ? localStorage.getItem('token') : '402848eb5bf02279015bf0369a73001';
 		console.log('token=' + token);
 		data['token'] = token;
 		if(!data['uid']) {
 			data['uid'] = localStorage.getItem('uid');
 		}
+		if(!data['account']) {
+			data['account'] = localStorage.getItem('account') ? localStorage.getItem('account') : "402848eb5bf02279015bf0369a730017";
+		}
 		if(!data['sid']) {
 			data['sid'] = '1232eds';
 		}
+		url=url+"?token="+token+"&account="+token+"&sid="+data['sid']
+		console.log("body="+data['body']);
+		console.log("url="+url);
 		mui.ajax({
 			url: url,
 			type: 'post',
@@ -86,7 +91,7 @@ bank = {
 			dataType: 'json',
 			success: function(res) {
 				console.log('current page = ' + self.id + ' response=' + JSON.stringify(res));
-				if(res.code == 200) {
+				if(res.code == "A00001") {
 					if(callback) {
 						callback(res.data);
 					}
@@ -127,17 +132,17 @@ bank = {
 				}
 			},
 			error: function() {
-				
+
 				mui.toast('网络错误');
 			},
-			complete:function(){
-//				if(mui('#refreshContainer')!=undefined) {
-//					console.log(mui('#refreshContainer'));
-//					mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
-//					mui('#refreshContainer').pullRefresh().endPullupToRefresh();
-//				}
+			complete: function() {
+				//				if(mui('#refreshContainer')!=undefined) {
+				//					console.log(mui('#refreshContainer'));
+				//					mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+				//					mui('#refreshContainer').pullRefresh().endPullupToRefresh();
+				//				}
 			}
-			
+
 		})
 	}
 }
@@ -162,4 +167,14 @@ function parseQueryString(url) {
 		}
 	}
 	return ret;
+}
+
+function parseTimeStamp(timeStamp) {
+	var date = new Date(timeStamp*1);
+	Y = date.getFullYear() + '-';
+	M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+	D = date.getDate() + ' ';
+	h = date.getHours() < 10 ? '0' + date.getHours()+ ':' : date.getHours() + ':'; 
+	m =  date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+	return Y+M+D+h+m;
 }

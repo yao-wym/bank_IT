@@ -173,6 +173,9 @@
 			"css/common.css",
 			"css/mui.min.css",
 			"js/vue-tap.js"
+		],
+		"refer": [
+			"pages/order_detail_out.html"
 		]
 	},
 	"index_check_list.html": {
@@ -198,7 +201,11 @@
 			"css/common.css",
 			"fonts/mui.ttf",
 			"css/mui.min.css",
-			"js/vue-tap.js"
+			"js/vue-tap.js",
+			"js/api.js"
+		],
+		"refer": [
+			"pages/reset_password.html"
 		]
 	},
 	"pages/my_used_goods.html": {
@@ -225,6 +232,11 @@
 			"fonts/mui.ttf",
 			"css/mui.min.css",
 			"js/vue-tap.js"
+		],
+		"refer": [
+			"pages/map_container.html",
+			"pages/staff_detail.html",
+			"pages/component_edit.html"
 		]
 	},
 	"pages/goods_search.html": {
@@ -268,7 +280,8 @@
 			"js/vue-tap.js",
 			"pages/staff_search_sub.html",
 			"fonts/mui.ttf",
-			"img/user-default.jpg"
+			"img/user-default.jpg",
+			"js/api.js"
 		],
 		"refer": [
 			"pages/staff_search_sub.html"
@@ -313,7 +326,8 @@
 			"fonts/mui.ttf",
 			"css/mui.min.css",
 			"js/vue-tap.js",
-			"pages/my_comments_sub.html"
+			"pages/my_comments_sub.html",
+			"js/api.js"
 		],
 		"refer": [
 			"pages/my_comments_sub.html"
@@ -366,7 +380,12 @@
 			"css/common.css",
 			"fonts/mui.ttf",
 			"css/mui.min.css",
-			"js/vue-tap.js"
+			"js/vue-tap.js",
+			"js/api.js"
+		],
+		"refer": [
+			"pages/staff_detail.html",
+			"pages/map_container.html"
 		]
 	},
 	"pages/order_detail_out.html": {
@@ -378,6 +397,9 @@
 			"fonts/mui.ttf",
 			"css/mui.min.css",
 			"js/vue-tap.js"
+		],
+		"refer": [
+			"pages/order_detail_repair.html"
 		]
 	},
 	"pages/my_all_goods_sub.html": {
@@ -466,7 +488,49 @@
 	},
 	"pages/machine_tips.html": {
 		"resources": [
-			"fonts/mui.ttf"
+			"fonts/mui.ttf",
+			"js/common.js",
+			"js/vue.js",
+			"css/common.css",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"js/api.js"
+		]
+	},
+	"pages/map_container.html": {
+		"resources": [
+			"js/immersed.js",
+			"js/common.js",
+			"js/vue.js",
+			"js/mui.min.js",
+			"css/common.css",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/vue-tap.js"
+		]
+	},
+	"pages/staff_detail.html": {
+		"resources": [
+			"js/common.js",
+			"js/vue.js",
+			"css/common.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/vue-tap.js"
+		],
+		"refer": [
+			"pages/my_comments.html"
+		]
+	},
+	"pages/reset_password.html": {
+		"resources": [
+			"js/common.js",
+			"js/vue.js",
+			"css/common.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
 		]
 	}
 }

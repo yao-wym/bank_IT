@@ -26,27 +26,27 @@
 			<div v-cloak id="" style="margin-top:55px">
 				<!--数据列表-->
 				<ul id="order-list" class="bank-list" style="padding: 0;">
-					<li style="margin-top: 10px;padding: ;background-color: white;" v-for="order in orderList[orderType]" track-by="$index" class="mui-table-view-cell">
-						<a v-tap="showDetail(order)" style="overflow: hidden;padding: 0;">
-							<p style="border-bottom:1px solid #e8edf8;padding: 10px 15px;">
-								<label>流水号：</label>：{{order.orderId}}
-								<span v-bind:style="{color:labelColor[orderType],borderColor:labelColor[orderType]}" class="state-label">{{order.status}}</span>
+				<li style="margin-top: 10px;padding: ;background-color: white;" v-for="order in orderList[orderType]" track-by="$index" class="mui-table-view-cell">
+					<a link="pages/order_progress_detail.html?orderId={{order.id}}"  style="overflow: hidden;padding: 0;">
+						<p style="border-bottom:1px solid #e8edf8;padding: 10px 15px;">
+							<label>流水号：</label>{{order.orderNo}}
+							<span class="state-label">{{order.orderStatus}}</span>
+						</p>
+						<div style="padding: 0 15px;">
+							<p><label>下单日期：</label>{{order.beginDate}}</p>
+							<p class="list-col-2">
+								<span><label>机具编号：</label>{{order.code}}</span>
+								<span><label>机具型号：</label>{{order.modelCode}}</span>
 							</p>
-							<div style="padding: 0 15px;">
-								<p><label>下单日期：</label>{{order.time}}</p>
-								<p class="list-col-2">
-									<span><label>机具编号：</label>{{order.machineOrder}}</span>
-									<span><label>机具型号：</label>{{order.machineType}}</span>
-								</p>
-								<p class="list-col-2">
-									<span><label>装机地址：</label>{{order.machineAddr}}</span>
-									<span><label>序列号：</label>{{order.machineId}}</span>
-								</p>
-							</div>
+							<p class="list-col-2">
+								<span><label>装机地址：</label>{{order.insSide}}</span>
+								<span><label>序列号：</label>{{order.sn}}</span>
+							</p>
+						</div>
 
-						</a>
-					</li>
-				</ul>
+					</a>
+				</li>
+			</ul>
 			</div>
 
 	</body>
@@ -57,20 +57,32 @@
 	<script src="js/api.js"></script>
 	<script src="js/common.js"></script>
 	<script type="text/javascript">
-		function pullOrderList() {
-			bank.get(ORDER_LIST_API, function(e) {
-				this.orderList[this.orderType] = e.list
-			})
+		var statusMap = {
+			"0":"已出发",
+			"1":"维修中",
+			"2":"维修完成",
+			"3":"维修失败",
 		}
+		function pullOrderList() {
+			bank.get(ORDER_LIST_API,{page:1,size:20}, function(e) {
+				obj = {};
+				for(var key in vm.orderList){
+					obj[key] = vm.orderList[key];
+				}
+				for(var i in e.list){
+					var time = new Date(e.list[i]['beginDate']*1);
+					e.list[i]['beginDate'] = parseTimeStamp(e.list[i]['beginDate']);
+					e.list[i]['orderStatus'] = statusMap[e.list[i]['orderStatus']];
+				}
+				obj[vm.orderType] = e.list;
+				vm.orderList = obj;
+			})
+		} 
 		var vm = new Vue({
 			el: '#app',
 			methods: {
 				showDetail: function(order) {
-					if(order.status == '已出发') {
-						redirect('pages/order_detail_out.html');
-					} else if(order.status == '维修中') {
-						redirect('pages/order_detail_repair.html');
-					}
+					redirect('pages/order_detail_repair.html');
 				},
 
 			},
@@ -90,63 +102,7 @@
 					"3":"#FF686A",
 				},
 				orderList: {
-					"1": [{
-						status: '维修中',
-						orderId: '132',
-						machineSn: '123eqw',
-						machineAddr: 1,
-						machineOrder: 1,
-						machineType: 1,
-						machineId: 1,
-						time: "2017-02-03 20:22:22"
-					}, {
-						status: '已出发',
-						orderId: '132',
-						machineSn: '123eqw',
-						machineAddr: 1,
-						machineOrder: 1,
-						machineType: 1,
-						machineId: 1,
-						time: "2017-02-03 20:22:22"
-					}, ],
-					"2": [{
-						status: '维修中',
-						orderId: '132',
-						machineSn: '123eqw',
-						machineAddr: 1,
-						machineOrder: 1,
-						machineType: 1,
-						machineId: 1,
-						time: "2017-02-03 20:22:22"
-					}, {
-						status: '已出发2',
-						orderId: '132',
-						machineSn: '123eqw',
-						machineAddr: 1,
-						machineOrder: 1,
-						machineType: 1,
-						machineId: 1,
-						time: "2017-02-03 20:22:22"
-					}, ],
-					"3": [{
-						status: '维修中3',
-						orderId: '132',
-						machineSn: '123eqw',
-						machineAddr: 1,
-						machineOrder: 1,
-						machineType: 1,
-						machineId: 1,
-						time: "2017-02-03 20:22:22"
-					}, {
-						status: '已出发3',
-						orderId: '132',
-						machineSn: '123eqw',
-						machineAddr: 1,
-						machineOrder: 1,
-						machineType: 1,
-						machineId: 1,
-						time: "2017-02-03 20:22:22"
-					}, ]
+					
 				},
 			},
 
@@ -167,6 +123,9 @@
 		//				}
 		//			}
 		//		})
+		mui.plusReady(function(){
+			pullOrderList();
+		})
 		window.addEventListener("change_type", function(e) {
 			console.log(JSON.stringify(e.detail.type));
 			vm.orderType = e.detail.type;
