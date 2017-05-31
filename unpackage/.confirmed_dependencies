@@ -56,7 +56,8 @@
 			"pages/login.html",
 			"pages/order_detail_wait.html",
 			"pages/route_detail.html",
-			"pages/components_search.html"
+			"pages/components_search.html",
+			"pages/order_detail.html"
 		]
 	},
 	"index_check.html": {
@@ -146,7 +147,8 @@
 		],
 		"refer": [
 			"pages/order_detail_repair.html",
-			"pages/order_detail_out.html"
+			"pages/order_detail_out.html",
+			"pages/order_progress_detail.html"
 		]
 	},
 	"index_recive_list.html": {

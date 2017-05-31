@@ -33,7 +33,7 @@
 			<!--数据列表-->
 			<ul id="recive-list" class="bank-list" style="padding: 0;">
 				<li style="margin-top: 10px;padding: ;background-color: white;" v-for="order in reciveList[reciveType]" track-by="$index" class="mui-table-view-cell">
-					<a link="pages/order_detail.html?orderId={{order.id}}" style="overflow: hidden;padding: 0;">
+					<a link="pages/order_progress_detail.html?orderId={{order.id}}" style="overflow: hidden;padding: 0;">
 						<p style="border-bottom:1px solid #e8edf8;padding: 10px 15px;">
 							<label>流水号：</label>{{order.orderNo}}
 							<span class="state-label">{{order.orderStatus}}</span>

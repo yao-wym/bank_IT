@@ -152,6 +152,7 @@
 					redirect("map_container.html");
 				},
 				updateTask:function(route){
+					route['atmId'] = route['code'];
 					route['lineName'] = this.lineName;
 					routeStr = JSON.stringify(route);
 					bank.post(TASK_UPDATE_API,{"body":routeStr},function(res){

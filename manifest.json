@@ -258,7 +258,8 @@
 					"pages/login.html",
 					"pages/order_detail_wait.html",
 					"pages/route_detail.html",
-					"pages/components_search.html"
+					"pages/components_search.html",
+					"pages/order_detail.html"
 				],
 				"priority": 0
 			},
@@ -349,7 +350,8 @@
 				],
 				"refer": [
 					"pages/order_detail_repair.html",
-					"pages/order_detail_out.html"
+					"pages/order_detail_out.html",
+					"pages/order_progress_detail.html"
 				],
 				"priority": 0
 			},
@@ -786,7 +788,6 @@
 				"pages/work_order.html",
 				"pages/order_detail_group.html",
 				"pages/barcode_scan2.html",
-				"pages/order_progress_detail.html",
 				"pages/goods_edit_sub.html",
 				"img/-电话@2x.png",
 				"img/我的-2@3x.png",
