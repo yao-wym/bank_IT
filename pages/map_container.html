@@ -56,13 +56,37 @@
 			}
 
 			function createMarker() {
-				//高德地图坐标为(116.3406445236,39.9630878208), 百度地图坐标为(116.347292,39.968716
-				var marker = new plus.maps.Marker(new plus.maps.Point(116.347292, 39.968716));
-				marker.setIcon("../img/blue_location.png");
-				marker.setLabel("维修人员1");
-				var bubble = new plus.maps.Bubble("文耀民\n年龄：20");
-				marker.setBubble(bubble);
-				map.addOverlay(marker);
+
+
+				// data info :vm.worker1  :[0]neme   [1]id   [2]level    [3]state   [4]loc1    [5]loc2
+				if(vm.worker1.length > 5) {
+
+					var marker1 = new plus.maps.Marker(new plus.maps.Point(parseFloat(vm.worker1[4]), parseFloat(vm.worker1[5])));
+					marker1.setIcon(getIconFromState(vm.worker1[3]));
+					marker1.setLabel(vm.worker1[0]);
+					var bubble = new plus.maps.Bubble("派单员   编号：" + vm.worker1[1] + "   " + vm.worker1[2] + "级");
+					marker1.setBubble(bubble);
+					map.addOverlay(marker1);
+				}
+
+				if(vm.worker2.length > 5) {
+
+					var marker2 = new plus.maps.Marker(new plus.maps.Point(parseFloat(vm.worker2[4]), parseFloat(vm.worker2[5])));
+					marker2.setIcon(getIconFromState(vm.worker2[3]));
+					marker2.setLabel(vm.worker2[0]);
+					var bubble = new plus.maps.Bubble("派单员   编号：" + vm.worker2[1] + "   " + vm.worker2[2] + "级");
+					marker2.setBubble(bubble);
+					map.addOverlay(marker2);
+				}
+				if(vm.part.length > 5) {
+					var part = new plus.maps.Marker(new plus.maps.Point(parseFloat(vm.part[4]), parseFloat(vm.part[5])));
+					part.setIcon("../img/map_user_rect.png");
+					part.setLabel(vm.part[0]);
+					var bubble = new plus.maps.Bubble("编号：" + vm.part[1] );
+					part.setBubble(bubble);
+					map.addOverlay(part);
+					
+				}
 			}
 
 			function createSubview() {
@@ -84,6 +108,12 @@
 			function resetMap() {
 				//map.centerAndZoom(pcenter,12);
 				map.reset();
+			}
+
+			function getIconFromState(state) {
+				if(state == '1') {
+					return "../img/blue_location.png"
+				}
 			}
 		</script>
 		<link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
@@ -124,10 +154,14 @@
 			el: '#app',
 			data: {
 				title: '地图',
+				worker1: '张三#XSWDXWDQ#1#1#116.347292#39.968716'.split('#'),
+				worker2:'赵三#XSWDXWDQ#1#1#116.357292#39.978716'.split('#'),
+				part: 'ATM#ATM1111122#1#1#116.337292#39.958716'.split('#')
 			},
 		})
-		mui.plusReady(function(){
-//			vm.title = self.title
+		mui.plusReady(function() {
+			//			vm.title = self.title
+
 		})
 	</script>
 
